@@ -3,6 +3,10 @@ package com.ting.honormanage.entity;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * @author nitmali@126.com
+ * @date 2018/3/14 15:58
+ */
 @Entity
 public class HonorInfo {
     @Id
