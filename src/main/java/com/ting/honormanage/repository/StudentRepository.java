@@ -15,26 +15,11 @@ public interface StudentRepository extends CrudRepository<StudentInfo,Long> {
 
     /**
      * 根据学生学号查询学生信息
-     *
-     * @param number 学号
-     * @return StudentInfo
      */
     StudentInfo findStudentInfoByNumber(String number);
 
     /**
      * 根据学生编号查询学生信息
-     *
-     * @param id 编号
-     * @return StudentInfo
      */
     StudentInfo findStudentInfoById(Long id);
-
-
-    /**
-     * 所有学生信息
-     *
-     * @return StudentInfo
-     */
-    @Override
-    List<StudentInfo> findAll();
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b80a5b2a-a5e9-4ec0-85c5-91332c219249" name="m" url="http://nitmali.xyz">
+        <fileTransfer host="nitmali.xyz" port="6968" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="6968" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
