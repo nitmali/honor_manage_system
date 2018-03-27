@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author nitmali
  */
 @Controller
-public class HomeController {
+public class MainController {
 
     @GetMapping("/")
     public String index( ) {
-        return "/index";
+        return "/index.html";
     }
 
 

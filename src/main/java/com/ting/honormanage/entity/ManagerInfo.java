@@ -19,7 +19,6 @@ public class ManagerInfo {
     private String username;
 
     @Column
-    @JsonIgnore
     private String password;
 
     public Long getId() {

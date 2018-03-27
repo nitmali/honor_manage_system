@@ -14,11 +14,10 @@ public class StudentInfo {
     @GeneratedValue
     private Long id;
 
-    @Column(length = 10,nullable = false)
+    @Column(length = 10,nullable = false,unique = true)
     private String number;
 
     @Column(nullable = false)
-    @JsonIgnore
     private String password;
 
     @Column(nullable = false)
@@ -38,6 +37,31 @@ public class StudentInfo {
 
     @ManyToOne
     private ClassInfo classInfo;
+
+    public StudentInfo() {
+    }
+
+    public StudentInfo(StudentInfo studentInfo) {
+        this.number = studentInfo.number;
+        this.password = studentInfo.password;
+        this.name = studentInfo.name;
+        this.sex = studentInfo.sex;
+        this.collegeInfo = studentInfo.collegeInfo;
+        this.gradeInfo = studentInfo.gradeInfo;
+        this.majorInfo = studentInfo.majorInfo;
+        this.classInfo = studentInfo.classInfo;
+    }
+
+    public void setStudentInfo(StudentInfo studentInfo) {
+        this.number = studentInfo.number;
+        this.password = studentInfo.password;
+        this.name = studentInfo.name;
+        this.sex = studentInfo.sex;
+        this.collegeInfo = studentInfo.collegeInfo;
+        this.gradeInfo = studentInfo.gradeInfo;
+        this.majorInfo = studentInfo.majorInfo;
+        this.classInfo = studentInfo.classInfo;
+    }
 
     public Long getId() {
         return id;

@@ -1,13 +1,13 @@
 package com.ting.honormanage.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
 /**
  * @author nitmali@126.com
  * @date 2018/3/21 13:14
  */
 
-@RestController
+@Controller
 public class ReportRecordController {
 
 }
