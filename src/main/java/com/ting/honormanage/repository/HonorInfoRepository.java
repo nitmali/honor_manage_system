@@ -2,6 +2,7 @@ package com.ting.honormanage.repository;
 
 import com.ting.honormanage.entity.HonorInfo;
 import org.springframework.data.repository.CrudRepository;
+import org.w3c.dom.ls.LSInput;
 
 import java.util.Date;
 import java.util.List;
@@ -14,22 +15,32 @@ public interface HonorInfoRepository extends CrudRepository<HonorInfo,Long>{
     /**
      * 根据学年间断查询荣誉
      */
-    List<HonorInfo> findByYearBetween(Date year1,Date year2);
+    List<HonorInfo> findHonorInfoByYearBetween(Date year1,Date year2);
 
     /**
      * 根据学年查询荣誉
      */
-    List<HonorInfo> findByYear(Date year);
+    List<HonorInfo> findHonorInfoByYear(Date year);
 
     /**
      * 根据ID查询荣誉
      */
-    HonorInfo findById(Long id);
+    HonorInfo findHonorInfoById(Long id);
 
     /**
      * 根据名称查询荣誉
      */
-    HonorInfo findByName(String name);
+    List<HonorInfo> findHonorInfoByName(String name);
 
+    /**
+     * 根据类型查询荣誉
+     */
+    List<HonorInfo> findHonorInfoByKind(HonorInfo.Kind kind);
+
+
+    /**
+     * 根据状态查询荣誉
+     */
+    List<HonorInfo> findHonorInfoByStatus(HonorInfo.Status status);
 
 }
