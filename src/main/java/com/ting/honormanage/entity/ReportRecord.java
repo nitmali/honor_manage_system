@@ -44,6 +44,16 @@ public class ReportRecord {
         INVALID
     }
 
+    public void setReportRecord(ReportRecord reportRecord)
+    {
+        this.id = reportRecord.id;
+        this.honorInfo = reportRecord.honorInfo;
+        this.studentInfo = reportRecord.studentInfo;
+        this.recordTime = reportRecord.recordTime;
+        this.annex = reportRecord.annex;
+        this.status = reportRecord.status;
+    }
+
     public Long getId() {
         return id;
     }

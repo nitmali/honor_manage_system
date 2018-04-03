@@ -1863,7 +1863,7 @@
                 'referenced during render. Make sure that this property is reactive, ' +
                 'either in the data option, or for class-based components, by ' +
                 'initializing the property. ' +
-                'See: https://vuejs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties.',
+                'See: https://vueJs.org/v2/guide/reactivity.html#Declaring-Reactive-Properties.',
                 target
             );
         };
@@ -3309,7 +3309,7 @@
             data = {};
             "development" !== 'production' && warn(
                 'data functions should return an object:\n' +
-                'https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function',
+                'https://vueJs.org/v2/guide/components.html#data-Must-Be-a-Function',
                 vm
             );
         }
@@ -8299,7 +8299,7 @@
             } else if ("development" !== 'production' && isChrome) {
                 console[console.info ? 'info' : 'log'](
                     'Download the Vue Devtools extension for a better development experience:\n' +
-                    'https://github.com/vuejs/vue-devtools'
+                    'https://github.com/vueJs/vue-devtools'
                 );
             }
         }
@@ -8310,7 +8310,7 @@
             console[console.info ? 'info' : 'log'](
                 "You are running Vue in development mode.\n" +
                 "Make sure to turn on production mode when deploying for production.\n" +
-                "See more tips at https://vuejs.org/guide/deployment.html"
+                "See more tips at https://vueJs.org/guide/deployment.html"
             );
         }
     }, 0);
@@ -9979,7 +9979,7 @@
             state.warn(
                 "<" + (el.tag) + " v-for=\"" + alias + " in " + exp + "\">: component lists rendered with " +
                 "v-for should have explicit keys. " +
-                "See https://vuejs.org/guide/list.html#key for more info.",
+                "See https://vueJs.org/guide/list.html#key for more info.",
                 true /* tip */
             );
         }

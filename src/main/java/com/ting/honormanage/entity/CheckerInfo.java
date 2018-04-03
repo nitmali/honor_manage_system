@@ -27,9 +27,19 @@ public class CheckerInfo {
     @Column(length = 11)
     private String phone;
 
-    //权限
     @Column
-    private String authority;
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
+    public void setCheckerInfo(CheckerInfo checkerInfo)
+    {
+        this.id = checkerInfo.id;
+        this.username = checkerInfo.username;
+        this.password = checkerInfo.password;
+        this.name = checkerInfo.name;
+        this.phone = checkerInfo.phone;
+        this.authority = checkerInfo.authority;
+    }
 
     public Long getId() {
         return id;
@@ -71,11 +81,19 @@ public class CheckerInfo {
         this.phone = phone;
     }
 
-    public String getAuthority() {
+    public Authority getAuthority() {
         return authority;
     }
 
-    public void setAuthority(String authority) {
+    public void setAuthority(Authority authority) {
         this.authority = authority;
+    }
+
+    public enum Authority
+    {
+        //一级权限
+        FIRST_LEVEL,
+        //二级权限
+        SECOND_LEVEL
     }
 }

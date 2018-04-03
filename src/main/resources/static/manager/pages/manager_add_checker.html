@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns: xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-show="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>管理员首页</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-target=".navbar-collapse" data-toggle="collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="manager_index.html">高校学生荣誉管理平台</a>
+        </div>
+        <!-- /.navbar-header -->
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="manager_password_reset.html"><i class="fa fa-gear fa-fw"></i>修改密码</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i>退出</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- /.dropdown -->
+        </ul>
+
+        <!--/*********************************导航*************************************************************/-->
+        <!-- /.navbar-top-links -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <ul class="nav" id="side-menu">
+                    <li>
+                        <a href="manager_index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="#">审核员账号管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="manager_add_checker.html">添加审核员账号</a>
+                            </li>
+                            <li>
+                                <a href="manager_show_checker.html">查看审核员账号</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="#">荣誉信息管理<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="manager_add_honor.html">添加荣誉信息</a>
+                            </li>
+                            <li>
+                                <a href="manager_show_honor.html">查看荣誉信息</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
+                    </li>
+                    <li>
+                        <a href="manager_show_record.html">申报记录管理</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.sidebar-collapse -->
+        </div>
+        <!-- /.navbar-static-side -->
+        <!--/*********************************导航*************************************************************/-->
+
+    </nav>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default" id="addCheckerApp">
+                        <div class="panel-heading">
+                            添加审核员账号
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <form role="form">
+                                        <div class="form-group">
+                                            <label>用户名</label>
+                                            <input type="text" class="form-control" v-model="checkerInfo.username">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>密码</label>
+                                            <input type="password" class="form-control" v-model="checkerInfo.password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>确认密码</label>
+                                            <input type="password" class="form-control" v-model="passwordAgain"
+                                                   v-on:blur="verification_password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>姓名</label>
+                                            <input type="text" class="form-control" v-model="checkerInfo.name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>联系方式</label>
+                                            <input type="text" class="form-control" v-model="checkerInfo.phone"
+                                                   v-on:blur="verification_phone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>权限</label>
+                                            <select class="form-control" v-model="checkerInfo.authority">
+                                                <option></option>
+                                                <option>FIRST_LEVEL</option>
+                                                <option>SECOND_LEVEL</option>
+                                            </select>
+                                        </div>
+                                        <a type="submit" class="btn btn-success" style="width: 100px"
+                                           v-on:click="add_checkerInfo">添加</a>
+                                        <a type="reset" class="btn btn-danger" style="width: 100px"
+                                           v-on:click="reset_data">重置</a>
+                                    </form>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+<script src="../../public/js/vueJs/vue.js"></script>
+
+<!-- DataTables JavaScript -->
+<script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
+<script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+<script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+
+<script src="../customize/js/manager_add_checker.js"></script>
+
+</body>
+
+</html>

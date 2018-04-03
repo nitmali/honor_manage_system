@@ -44,9 +44,9 @@ public class StudentController {
         if (studentInfo1 == null) {
             studentRepository.save(studentInfo);
         } else {
-            return "student already exists";
+            return "{\"message\":\"student already exists\"}";
         }
-        return "request success";
+        return "{\"message\":\"add studentInfo success\"}";
     }
 
     @PostMapping("/update_studentInfo")
@@ -58,7 +58,7 @@ public class StudentController {
             studentInfo1.setStudentInfo(studentInfo);
             studentRepository.save(studentInfo1);
         }
-        return "request success";
+        return "{\"message\":\"update studentInfo success\"}";
     }
 
     @GetMapping("/delete_studentInfo")
@@ -66,12 +66,12 @@ public class StudentController {
         StudentInfo studentInfo = studentRepository.findStudentInfoByNumber(number);
         {
             if (studentInfo == null) {
-                return "not find student";
+                return "{\"message\":\"not find student\"}";
             } else {
                 studentRepository.delete(studentInfo.getId());
             }
         }
-        return "request success";
+        return "{\"message\":\"request success\"}";
     }
 
 }

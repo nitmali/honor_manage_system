@@ -28,7 +28,7 @@ public class HonorInfoController {
     @PostMapping("/add_honorInfo")
     public String addHonorInfo(@RequestBody HonorInfo honorInfo) {
         honorInfoRepository.save(honorInfo);
-        return "add honorInfo success";
+        return "{\"message\":\"add honorInfo success\"}";
     }
 
     @GetMapping("/get_honorInfo_yearBetween")
