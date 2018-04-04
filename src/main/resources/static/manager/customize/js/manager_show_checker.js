@@ -41,24 +41,36 @@ var checkerModalApp = new Vue({
         }
         ,
         update_checkerInfo: function (checkerInfo) {
-
-            $.ajax({
-                url: '/update_checkerInfo',
-                type: 'POST',
-                data: JSON.stringify(checkerModalApp.checkerInfo, null, 4),
-                contentType: "application/json",
-                dataType: "json",
-                success: function (data) {
-                    if (data.message === "update checkerInfo success") {
-                        alert("修改成功");
-                        location.reload();
+            if (checkerModalApp.verification_phone()) {
+                $.ajax({
+                    url: '/update_checkerInfo',
+                    type: 'POST',
+                    data: JSON.stringify(checkerModalApp.checkerInfo, null, 4),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.message === "update checkerInfo success") {
+                            alert("修改成功");
+                            location.reload();
+                        }
+                    },
+                    error: function (XMLResponse) {
+                        alert(XMLResponse.responseText);
                     }
-                },
-                error: function (XMLResponse) {
-                    alert(XMLResponse.responseText);
-                }
-            });
+                });
+            }
+
+        },
+
+        verification_phone: function () {
+            if (this.checkerInfo.phone.length !== 11 && this.checkerInfo.phone.length !== 6
+                && this.checkerInfo.phone !== '') {
+                alert("请填写有效有机号码")
+            } else {
+                return true;
+            }
         }
+
     }
 });
 
