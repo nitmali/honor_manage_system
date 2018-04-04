@@ -41,7 +41,7 @@ var checkerModalApp = new Vue({
         }
         ,
         update_checkerInfo: function (checkerInfo) {
-            if (checkerModalApp.verification_phone()) {
+            if (checkerModalApp.verification_phone() && checkerModalApp.verification_password()) {
                 $.ajax({
                     url: '/update_checkerInfo',
                     type: 'POST',
@@ -61,11 +61,18 @@ var checkerModalApp = new Vue({
             }
 
         },
-
+        verification_password: function () {
+            if (this.checkerInfo.password.length < 6 || this.checkerInfo.password.length > 16) {
+                alert("请输入6~16位密码");
+            } else {
+                return true;
+            }
+        },
         verification_phone: function () {
             if (this.checkerInfo.phone.length !== 11 && this.checkerInfo.phone.length !== 6
                 && this.checkerInfo.phone !== '') {
-                alert("请填写有效有机号码")
+                alert("请填写有效有机号码");
+
             } else {
                 return true;
             }

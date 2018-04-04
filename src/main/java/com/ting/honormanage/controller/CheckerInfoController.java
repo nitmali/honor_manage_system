@@ -19,7 +19,7 @@ public class CheckerInfoController {
     private CheckerInfoRepository checkerInfoRepository;
 
     @GetMapping("/get_checkerInfo_one")
-    public CheckerInfo checkerInfoOne(Long id){
+    public CheckerInfo checkerInfoOne(Long id) {
         return checkerInfoRepository.findCheckerInfoById(id);
     }
 
@@ -30,12 +30,12 @@ public class CheckerInfoController {
 
     @GetMapping("/get_checkerInfo_name")
     public List<CheckerInfo> getCheckerFromName(String name) {
-        System.err.println(name);
         return checkerInfoRepository.findCheckerInfoByName(name);
     }
 
     @GetMapping("/get_checkerInfo_username")
-    public List<CheckerInfo> getCheckerFromUsername(String username) {
+    public CheckerInfo getCheckerFromUsername(String username) {
+        System.err.println("usernam:" + username);
         return checkerInfoRepository.findCheckerInfoByUsername(username);
     }
 
@@ -51,18 +51,23 @@ public class CheckerInfoController {
 
     @PostMapping("/add_checkerInfo")
     public String addCheckerInfo(@RequestBody CheckerInfo checkerInfo) {
-        checkerInfoRepository.save(checkerInfo);
-        return "{\"message\":\"add checkerInfo success\"}";
+        CheckerInfo checkerInfo1 = checkerInfoRepository.findCheckerInfoByUsername(checkerInfo.getUsername());
+        if (checkerInfo1 != null) {
+            System.err.println("username error");
+            return "{\"message\":\"username error\"}";
+        } else {
+            checkerInfoRepository.save(checkerInfo);
+            return "{\"message\":\"add checkerInfo success\"}";
+        }
     }
 
     @PostMapping("/update_checkerInfo")
     public String updateCheckerInfo(@RequestBody CheckerInfo checkerInfo) {
         CheckerInfo checkerInfo1 = checkerInfoRepository.findCheckerInfoById(checkerInfo.getId());
-        if(checkerInfo1 == null)
-        {
+        if (checkerInfo1 == null) {
             return "{\"message\":\"checker not find\"}";
-        }else {
-            if("".equals(checkerInfo.getPassword())){
+        } else {
+            if ("".equals(checkerInfo.getPassword())) {
                 checkerInfo.setPassword(checkerInfo1.getPassword());
             }
             checkerInfo1.setCheckerInfo(checkerInfo);

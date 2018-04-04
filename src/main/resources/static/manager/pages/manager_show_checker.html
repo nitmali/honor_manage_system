@@ -179,7 +179,7 @@
                                 <div class="form-group">
                                     <label for="username">用户名</label>
                                     <input type="text" class="form-control" id="username"
-                                           v-model="checkerInfo.username">
+                                           v-model="checkerInfo.username" readonly>
                                 </div>
 
                                 <div class="form-group">
@@ -206,8 +206,9 @@
 
                                 <div class="form-group">
                                     <label for="password">密码（可选）</label>
-                                    <input type="text" class="form-control" id="password"
-                                           v-model="checkerInfo.password">
+                                    <input type="password" class="form-control" id="password"
+                                           v-model="checkerInfo.password"
+                                           v-on:blur="verification_password">
                                 </div>
 
                             </div>
@@ -218,12 +219,12 @@
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal" style="width: 100px"
+                <a type="button" class="btn btn-success" data-dismiss="modal" style="width: 100px"
                         v-on:click="update_checkerInfo">修改
-                </button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 100px"
+                </a>
+                <a type="button" class="btn btn-danger" data-dismiss="modal" style="width: 100px"
                         v-on:click="delete_checkerInfo">删除
-                </button>
+                </a>
             </div>
 
         </div>

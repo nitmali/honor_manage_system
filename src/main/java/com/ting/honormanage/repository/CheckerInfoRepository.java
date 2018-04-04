@@ -26,7 +26,7 @@ public interface CheckerInfoRepository extends CrudRepository<CheckerInfo,Long> 
     /**
      * 根据审核员用户名查询审核员信息
      */
-    List<CheckerInfo> findCheckerInfoByUsername(String username);
+    CheckerInfo findCheckerInfoByUsername(String username);
 
     /**
      * 根据审核员手机号查询审核员信息
