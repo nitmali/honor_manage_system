@@ -191,24 +191,23 @@
                                 <div class="form-group">
                                     <label for="phone">联系方式</label>
                                     <input type="text" class="form-control" id="phone"
-                                           v-model="checkerInfo.phone"
-                                           v-on:blur="verification_phone">
+                                           placeholder="请输入6位短号或11位长号"
+                                           v-model="checkerInfo.phone">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="authority">权限</label>
                                     <select id="authority" class="form-control" v-model="checkerInfo.authority">
-                                        <option></option>
-                                        <option>FIRST_LEVEL</option>
-                                        <option>SECOND_LEVEL</option>
+                                        <option>一级权限</option>
+                                        <option>二级权限</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password">密码（可选）</label>
                                     <input type="password" class="form-control" id="password"
-                                           v-model="checkerInfo.password"
-                                           v-on:blur="verification_password">
+                                           placeholder="请输入6~16位密码"
+                                           v-model="checkerInfo.password">
                                 </div>
 
                             </div>
@@ -219,7 +218,7 @@
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <a type="button" class="btn btn-success" data-dismiss="modal" style="width: 100px"
+                <a type="button" class="btn btn-success"  style="width: 100px"
                         v-on:click="update_checkerInfo">修改
                 </a>
                 <a type="button" class="btn btn-danger" data-dismiss="modal" style="width: 100px"

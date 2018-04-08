@@ -7,7 +7,8 @@ var table;
 var checkerModalApp = new Vue({
     el: '#checkerModalApp',
     data: {
-        checkerInfo: ''
+        checkerInfo: '',
+        post_checkerInfo: ''
     },
     methods: {
         get_checkerInfo_one: function (id) {
@@ -18,14 +19,27 @@ var checkerModalApp = new Vue({
                 function (checkerInfoOne) {
                     checkerModalApp.checkerInfo = checkerInfoOne;
                     checkerModalApp.checkerInfo.password = '';
+                    if (checkerModalApp.checkerInfo.authority === "FIRST_LEVEL") {
+                        checkerModalApp.checkerInfo.authority = "一级权限";
+                    }
+                    if (checkerModalApp.checkerInfo.authority === "SECOND_LEVEL") {
+                        checkerModalApp.checkerInfo.authority = "二级权限";
+                    }
                 });
         },
         delete_checkerInfo: function (checkerInfo) {
+            checkerModalApp.post_checkerInfo = checkerModalApp.checkerInfo;
+            if (checkerModalApp.post_checkerInfo.authority === "一级权限") {
+                checkerModalApp.post_checkerInfo.authority = "FIRST_LEVEL"
+            }
+            if (checkerModalApp.post_checkerInfo.authority === "二级权限") {
+                checkerModalApp.post_checkerInfo.authority = "SECOND_LEVEL"
+            }
 
             $.ajax({
                 url: '/delete_checkerInfo',
                 type: 'POST',
-                data: JSON.stringify(checkerModalApp.checkerInfo, null, 4),
+                data: JSON.stringify(checkerModalApp.post_checkerInfo, null, 4),
                 contentType: "application/json",
                 dataType: "json",
                 success: function (data) {
@@ -42,10 +56,17 @@ var checkerModalApp = new Vue({
         ,
         update_checkerInfo: function (checkerInfo) {
             if (checkerModalApp.verification_phone() && checkerModalApp.verification_password()) {
+                checkerModalApp.post_checkerInfo = checkerModalApp.checkerInfo;
+                if (checkerModalApp.post_checkerInfo.authority === "一级权限") {
+                    checkerModalApp.post_checkerInfo.authority = "FIRST_LEVEL"
+                }
+                if (checkerModalApp.post_checkerInfo.authority === "二级权限") {
+                    checkerModalApp.post_checkerInfo.authority = "SECOND_LEVEL"
+                }
                 $.ajax({
                     url: '/update_checkerInfo',
                     type: 'POST',
-                    data: JSON.stringify(checkerModalApp.checkerInfo, null, 4),
+                    data: JSON.stringify(checkerModalApp.post_checkerInfo, null, 4),
                     contentType: "application/json",
                     dataType: "json",
                     success: function (data) {
@@ -62,16 +83,17 @@ var checkerModalApp = new Vue({
 
         },
         verification_password: function () {
-            if (this.checkerInfo.password.length < 6 || this.checkerInfo.password.length > 16) {
+            if ((checkerModalApp.checkerInfo.password.length < 6 || checkerModalApp.checkerInfo.password.length > 16)
+                && checkerModalApp.checkerInfo.password !== '') {
                 alert("请输入6~16位密码");
             } else {
                 return true;
             }
         },
         verification_phone: function () {
-            if (this.checkerInfo.phone.length !== 11 && this.checkerInfo.phone.length !== 6
-                && this.checkerInfo.phone !== '') {
-                alert("请填写有效有机号码");
+            if (checkerModalApp.checkerInfo.phone.length !== 11 && checkerModalApp.checkerInfo.phone.length !== 6
+                && checkerModalApp.checkerInfo.phone !== '') {
+                alert("请填写有效手机号码");
 
             } else {
                 return true;
@@ -124,7 +146,17 @@ function getDataTable() {
                 {data: "phone"},
                 {data: "authority"}
             ],
-            columnDefs: []
+            columnDefs: [{
+                targets: 4,
+                render: function (value) {
+                    if (value === "FIRST_LEVEL") {
+                        return "一级权限";
+                    }
+                    if (value === "SECOND_LEVEL") {
+                        return "二级权限";
+                    }
+                }
+            }]
         });
 
     $('#manager_show_checker_table tbody').on('click', 'tr', function () {

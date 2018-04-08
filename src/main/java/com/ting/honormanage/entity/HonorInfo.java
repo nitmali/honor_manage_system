@@ -70,11 +70,21 @@ public class HonorInfo {
         OTHER
     }
 
-    public enum Status{
+    public enum Status {
         //有效
         EFFECTIVE,
         //失效
         INVALID
+    }
+
+    public void setHonorInfo(HonorInfo honorInfo) {
+        this.name = honorInfo.name;
+        this.level = honorInfo.level;
+        this.kind = honorInfo.kind;
+        this.level = honorInfo.level;
+        this.rank = honorInfo.rank;
+        this.year = honorInfo.year;
+        this.status = honorInfo.status;
     }
 
     public Long getId() {

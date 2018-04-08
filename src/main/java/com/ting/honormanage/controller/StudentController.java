@@ -53,7 +53,7 @@ public class StudentController {
     public String updateStudentInfo(@RequestBody StudentInfo studentInfo) {
         StudentInfo studentInfo1 = studentRepository.findStudentInfoByNumber(studentInfo.getNumber());
         if (studentInfo1 == null) {
-            return "not find student";
+            return "{\"message\":\"not find student\"}";
         } else {
             studentInfo1.setStudentInfo(studentInfo);
             studentRepository.save(studentInfo1);

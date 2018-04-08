@@ -32,8 +32,8 @@ public class HonorInfoController {
     }
 
     @GetMapping("/get_honorInfo_yearBetween")
-    public List<HonorInfo> getHonorInfoFromYearBetween(Date year1,Date year2) {
-        return honorInfoRepository.findHonorInfoByYearBetween(year1,year2);
+    public List<HonorInfo> getHonorInfoFromYearBetween(Date year1, Date year2) {
+        return honorInfoRepository.findHonorInfoByYearBetween(year1, year2);
     }
 
     @GetMapping("/get_honorInfo_year")
@@ -48,7 +48,7 @@ public class HonorInfoController {
 
     @GetMapping("/get_honorInfo_name")
     public List<HonorInfo> getHonorInfoFromName(String name) {
-        return  honorInfoRepository.findHonorInfoByName(name);
+        return honorInfoRepository.findHonorInfoByName(name);
     }
 
     @GetMapping("/get_honorInfo_kind")
@@ -61,5 +61,18 @@ public class HonorInfoController {
         return honorInfoRepository.findHonorInfoByStatus(status);
     }
 
+    @PostMapping("/update_honorInfo")
+    public String updateHonorInfo(@RequestBody HonorInfo honorInfo) {
+        HonorInfo honorInfo1 = honorInfoRepository.findHonorInfoById(honorInfo.getId());
+        {
+            if (honorInfo1 == null) {
+                return "{\"message\":\"not find honorInfo\"}";
+            } else {
+                honorInfo1.setHonorInfo(honorInfo);
+                honorInfoRepository.save(honorInfo1);
+            }
+            return "{\"message\":\"update honorInfo success\"}";
+        }
+    }
 
 }
