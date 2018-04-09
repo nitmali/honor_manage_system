@@ -1,5 +1,7 @@
 package com.ting.honormanage.entity;
 
+import com.ting.honormanage.model.HonorInfoModel;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -77,15 +79,29 @@ public class HonorInfo {
         INVALID
     }
 
-    public void setHonorInfo(HonorInfo honorInfo) {
-        this.name = honorInfo.name;
-        this.level = honorInfo.level;
-        this.kind = honorInfo.kind;
-        this.level = honorInfo.level;
-        this.rank = honorInfo.rank;
-        this.year = honorInfo.year;
-        this.status = honorInfo.status;
+    public HonorInfo() {
     }
+
+    public HonorInfo(HonorInfoModel honorInfoModel) {
+        this.id = honorInfoModel.idOfHonorInfo();
+        this.name = honorInfoModel.nameOfHonorInfo();
+        this.level = honorInfoModel.levelOfHonorInfo();
+        this.kind = honorInfoModel.kindOfHonorInfo();
+        this.rank = honorInfoModel.rankOfHonorInfo();
+        this.year = honorInfoModel.yearOfHonorInfo();
+        this.status = honorInfoModel.statusOfHonorInfo();
+    }
+
+    public void setHonorInfoFromModel(HonorInfoModel honorInfoModel) {
+        this.id = honorInfoModel.idOfHonorInfo();
+        this.name = honorInfoModel.nameOfHonorInfo();
+        this.level = honorInfoModel.levelOfHonorInfo();
+        this.kind = honorInfoModel.kindOfHonorInfo();
+        this.rank = honorInfoModel.rankOfHonorInfo();
+        this.year = honorInfoModel.yearOfHonorInfo();
+        this.status = honorInfoModel.statusOfHonorInfo();
+    }
+
 
     public Long getId() {
         return id;
@@ -141,5 +157,88 @@ public class HonorInfo {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Long idOfHonorInfoModel() {
+        return id;
+    }
+
+    public String nameOfHonorInfoModel() {
+        return name;
+    }
+
+    public Date yearOfHonorInfoModel() {
+        return year;
+    }
+
+    public String levelOfHonorInfoModel() {
+        String levelCOLLEGE = "院级";
+        String levelSCHOOL = "校级";
+        String levelMUNICIPAL = "市级";
+        String levelPROVINCIAL = "省级";
+        String levelNATIONAL = "国家级";
+
+        if (this.level == Level.COLLEGE) {
+            return levelCOLLEGE;
+        } else if (this.level == HonorInfo.Level.SCHOOL) {
+            return levelSCHOOL;
+        } else if (this.level == HonorInfo.Level.MUNICIPAL) {
+            return levelMUNICIPAL;
+        } else if (this.level == HonorInfo.Level.PROVINCIAL) {
+            return levelPROVINCIAL;
+        } else if (this.level == HonorInfo.Level.NATIONAL) {
+            return levelNATIONAL;
+        } else {
+            return null;
+        }
+    }
+
+    public String kindOfHonorInfoModel() {
+        String kindACADEMIC_RESEARCH = "学术研究";
+        String kindDISCIPLINE_COMPETITION = "学科竞赛";
+        String kindINNOVATION_ENTREPRENEURSHIP = "创新创业";
+        String kindEXAMINATIONS = "考级考证";
+        if (this.kind == HonorInfo.Kind.ACADEMIC_RESEARCH) {
+            return kindACADEMIC_RESEARCH;
+        } else if (this.kind == HonorInfo.Kind.DISCIPLINE_COMPETITION) {
+            return kindDISCIPLINE_COMPETITION;
+        } else if (this.kind == HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP) {
+            return kindINNOVATION_ENTREPRENEURSHIP;
+        } else if (this.kind == HonorInfo.Kind.EXAMINATIONS) {
+            return kindEXAMINATIONS;
+        } else {
+            return null;
+        }
+    }
+
+    public String rankOfHonorInfoModel() {
+        String rankOTHER = "其他奖项";
+        String rankFIRST = "一等奖";
+        String rankSECOND = "二等奖";
+        String rankTHIRD = "三等奖";
+
+        if (this.rank == HonorInfo.Rank.OTHER) {
+            return rankOTHER;
+        } else if (this.rank == HonorInfo.Rank.FIRST) {
+            return rankFIRST;
+        } else if (this.rank == HonorInfo.Rank.SECOND) {
+            return rankSECOND;
+        } else if (this.rank == HonorInfo.Rank.THIRD) {
+            return rankTHIRD;
+        } else {
+            return null;
+        }
+    }
+
+    public String statusOfHonorInfoModel() {
+        String statusEffective = "有效";
+        String statusINVALID = "失效";
+        if (this.status == HonorInfo.Status.EFFECTIVE) {
+            return statusEffective;
+        } else if (this.status == HonorInfo.Status.INVALID) {
+            return statusINVALID;
+        } else {
+            return null;
+        }
     }
 }
