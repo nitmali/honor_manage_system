@@ -47,7 +47,6 @@ public class HonorInfoController {
         for (int i = 0; i < honorInfoList.size() - 1; i++){
             HonorInfoModel honorInfoModel = new HonorInfoModel(honorInfoList.get(i));
             honorInfoModelArrayList.add(honorInfoModel);
-            System.err.println(honorInfoModel.getKind());
         }
         return honorInfoModelArrayList;
     }
@@ -64,7 +63,6 @@ public class HonorInfoController {
         for (int i = 0; i < honorInfoList.size() - 1; i++){
             HonorInfoModel honorInfoModel = new HonorInfoModel(honorInfoList.get(i));
             honorInfoModelArrayList.add(honorInfoModel);
-            System.err.println(honorInfoModel.getKind());
         }
         return honorInfoModelArrayList;
     }
@@ -76,7 +74,6 @@ public class HonorInfoController {
         for (int i = 0; i < honorInfoList.size() - 1; i++){
             HonorInfoModel honorInfoModel = new HonorInfoModel(honorInfoList.get(i));
             honorInfoModelArrayList.add(honorInfoModel);
-            System.err.println(honorInfoModel.getKind());
         }
         return honorInfoModelArrayList;
     }
@@ -88,7 +85,6 @@ public class HonorInfoController {
         for (int i = 0; i < honorInfoList.size() - 1; i++){
             HonorInfoModel honorInfoModel = new HonorInfoModel(honorInfoList.get(i));
             honorInfoModelArrayList.add(honorInfoModel);
-            System.err.println(honorInfoModel.getKind());
         }
         return honorInfoModelArrayList;
     }

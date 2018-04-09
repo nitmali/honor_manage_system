@@ -7,39 +7,23 @@ var table;
 var checkerModalApp = new Vue({
     el: '#checkerModalApp',
     data: {
-        checkerInfo: '',
-        post_checkerInfo: ''
+        checkerInfo: ''
     },
     methods: {
-        get_checkerInfo_one: function (id) {
-            $.get("/get_checkerInfo_one",
+        get_checkerInfo_id: function (id) {
+            $.get("/get_checkerInfo_id",
                 {
                     id: id
                 },
                 function (checkerInfoOne) {
                     checkerModalApp.checkerInfo = checkerInfoOne;
-                    checkerModalApp.checkerInfo.password = '';
-                    if (checkerModalApp.checkerInfo.authority === "FIRST_LEVEL") {
-                        checkerModalApp.checkerInfo.authority = "一级权限";
-                    }
-                    if (checkerModalApp.checkerInfo.authority === "SECOND_LEVEL") {
-                        checkerModalApp.checkerInfo.authority = "二级权限";
-                    }
                 });
         },
         delete_checkerInfo: function (checkerInfo) {
-            checkerModalApp.post_checkerInfo = checkerModalApp.checkerInfo;
-            if (checkerModalApp.post_checkerInfo.authority === "一级权限") {
-                checkerModalApp.post_checkerInfo.authority = "FIRST_LEVEL"
-            }
-            if (checkerModalApp.post_checkerInfo.authority === "二级权限") {
-                checkerModalApp.post_checkerInfo.authority = "SECOND_LEVEL"
-            }
-
             $.ajax({
                 url: '/delete_checkerInfo',
                 type: 'POST',
-                data: JSON.stringify(checkerModalApp.post_checkerInfo, null, 4),
+                data: JSON.stringify(checkerModalApp.checkerInfo, null, 4),
                 contentType: "application/json",
                 dataType: "json",
                 success: function (data) {
@@ -56,17 +40,10 @@ var checkerModalApp = new Vue({
         ,
         update_checkerInfo: function (checkerInfo) {
             if (checkerModalApp.verification_phone() && checkerModalApp.verification_password()) {
-                checkerModalApp.post_checkerInfo = checkerModalApp.checkerInfo;
-                if (checkerModalApp.post_checkerInfo.authority === "一级权限") {
-                    checkerModalApp.post_checkerInfo.authority = "FIRST_LEVEL"
-                }
-                if (checkerModalApp.post_checkerInfo.authority === "二级权限") {
-                    checkerModalApp.post_checkerInfo.authority = "SECOND_LEVEL"
-                }
                 $.ajax({
                     url: '/update_checkerInfo',
                     type: 'POST',
-                    data: JSON.stringify(checkerModalApp.post_checkerInfo, null, 4),
+                    data: JSON.stringify(checkerModalApp.checkerInfo, null, 4),
                     contentType: "application/json",
                     dataType: "json",
                     success: function (data) {
@@ -146,22 +123,12 @@ function getDataTable() {
                 {data: "phone"},
                 {data: "authority"}
             ],
-            columnDefs: [{
-                targets: 4,
-                render: function (value) {
-                    if (value === "FIRST_LEVEL") {
-                        return "一级权限";
-                    }
-                    if (value === "SECOND_LEVEL") {
-                        return "二级权限";
-                    }
-                }
-            }]
+            columnDefs: []
         });
 
     $('#manager_show_checker_table tbody').on('click', 'tr', function () {
         var checker = table.row(this).data();
-        checkerModalApp.get_checkerInfo_one(checker.id);
+        checkerModalApp.get_checkerInfo_id(checker.id);
         $('#checkerModalApp').modal();
     });
 }

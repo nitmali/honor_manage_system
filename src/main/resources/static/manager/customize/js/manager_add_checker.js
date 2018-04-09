@@ -4,7 +4,6 @@ var addCheckerApp = new Vue({
     el: '#addCheckerApp',
     data: {
         checkerInfo: {},
-        post_checkerInfo: {},
         passwordAgain: '',
         flag: ''
     },
@@ -15,21 +14,14 @@ var addCheckerApp = new Vue({
                 && this.checkerInfo.phone !== undefined
                 && this.checkerInfo.username !== undefined
                 && this.passwordAgain !== undefined
-                && this.authority !== undefined) {
+                && this.checkerInfo.authority !== undefined) {
                 if (addCheckerApp.verification_phone() && addCheckerApp.verification_password()
                     && addCheckerApp.verification_username()) {
                     if (addCheckerApp.checkerInfo) {
-                        addCheckerApp.post_checkerInfo = addCheckerApp.checkerInfo;
-                        if (addCheckerApp.post_checkerInfo.authority === "一级权限") {
-                            addCheckerApp.post_checkerInfo.authority = "FIRST_LEVEL"
-                        }
-                        if (addCheckerApp.post_checkerInfo.authority === "二级权限") {
-                            addCheckerApp.post_checkerInfo.authority = "SECOND_LEVEL"
-                        }
                         $.ajax({
                             url: '/add_checkerInfo',
                             type: 'POST',
-                            data: JSON.stringify(addCheckerApp.post_checkerInfo, null, 4),
+                            data: JSON.stringify(addCheckerApp.checkerInfo, null, 4),
                             contentType: "application/json",
                             dataType: "json",
                             success: function (data) {

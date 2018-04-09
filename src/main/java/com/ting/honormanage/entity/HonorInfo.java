@@ -231,10 +231,10 @@ public class HonorInfo {
     }
 
     public String statusOfHonorInfoModel() {
-        String statusEffective = "有效";
+        String statusEFFECTIVE = "有效";
         String statusINVALID = "失效";
         if (this.status == HonorInfo.Status.EFFECTIVE) {
-            return statusEffective;
+            return statusEFFECTIVE;
         } else if (this.status == HonorInfo.Status.INVALID) {
             return statusINVALID;
         } else {
