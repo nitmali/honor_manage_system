@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LogoutController {
     @RequestMapping(value = "/api/logout")
-    public String managerLogout(HttpServletRequest request) {
-        System.err.println("get");
+    public String userLogout(HttpServletRequest request) {
         request.getSession().invalidate();
         return "/home.html";
     }

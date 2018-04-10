@@ -5,7 +5,7 @@ import com.ting.honormanage.entity.ReportRecord;
 import com.ting.honormanage.entity.StudentInfo;
 import com.ting.honormanage.repository.HonorInfoRepository;
 import com.ting.honormanage.repository.ReportRecordRepository;
-import com.ting.honormanage.repository.StudentRepository;
+import com.ting.honormanage.repository.StudentInfoRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,13 +23,13 @@ public class ReportRecordController {
     private ReportRecordRepository reportRecordRepository;
 
     @Resource
-    private StudentRepository studentRepository;
+    private StudentInfoRepository studentInfoRepository;
 
     @Resource
     private HonorInfoRepository honorInfoRepository;
 
     @GetMapping("/api/manager_checker/get_reportRecord_all")
-    public List<ReportRecord> reportRecordList() {
+    public List<ReportRecord> getReportRecordList() {
         return (List<ReportRecord>) reportRecordRepository.findAll();
     }
 
@@ -39,30 +39,30 @@ public class ReportRecordController {
     }
 
     @GetMapping("/api/manager_checker/get_reportRecord_status")
-    public List<ReportRecord> reportRecordListOfStatus(ReportRecord.Status status)
+    public List<ReportRecord> getReportRecordListFromStatus(ReportRecord.Status status)
     {
         return reportRecordRepository.findReportRecordByStatus(status);
     }
 
     @GetMapping("/api/manager_checker/get_reportRecord_studentInfo")
-    public List<ReportRecord> reportRecordListOfStudentInfo(Long studentId)
+    public List<ReportRecord> getReportRecordListFromStudentInfo(Long studentId)
     {
-        StudentInfo studentInfo = studentRepository.findStudentInfoById(studentId);
+        StudentInfo studentInfo = studentInfoRepository.findStudentInfoById(studentId);
         return reportRecordRepository.findReportRecordByStudentInfo(studentInfo);
     }
 
 
     @GetMapping("/api/manager_checker/get_reportRecord_honorInfo")
-    public List<ReportRecord> reportRecordListOfHonorInfo(Long honorId)
+    public List<ReportRecord> getReportRecordListFromHonorInfo(Long honorId)
     {
         HonorInfo honorInfo = honorInfoRepository.findHonorInfoById(honorId);
         return reportRecordRepository.findReportRecordByHonorInfo(honorInfo);
     }
 
     @GetMapping("/api/manager_checker/get_reportRecord_studentInfo_honorInfo")
-    public List<ReportRecord> reportRecordListOfStudentInfoAddHonorInfo(Long studentId,Long honorId)
+    public List<ReportRecord> getReportRecordListFromStudentInfoAndHonorInfo(Long studentId,Long honorId)
     {
-        StudentInfo studentInfo = studentRepository.findStudentInfoById(studentId);
+        StudentInfo studentInfo = studentInfoRepository.findStudentInfoById(studentId);
         HonorInfo honorInfo = honorInfoRepository.findHonorInfoById(honorId);
         return reportRecordRepository.findReportRecordByStudentInfoAndAndHonorInfo(studentInfo,honorInfo);
     }

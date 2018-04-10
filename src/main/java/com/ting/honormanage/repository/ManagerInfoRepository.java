@@ -7,6 +7,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author nitmali@126.com
  * @date 2018/4/10 10:46
  */
-public interface ManagerRepository extends CrudRepository<ManagerInfo,Long>{
+public interface ManagerInfoRepository extends CrudRepository<ManagerInfo,Long>{
     ManagerInfo findManagerInfoByUsername(String username);
 }

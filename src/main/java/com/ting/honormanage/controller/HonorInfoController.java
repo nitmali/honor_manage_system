@@ -23,7 +23,7 @@ public class HonorInfoController {
     private HonorInfoRepository honorInfoRepository;
 
     @GetMapping("/api/manager/get_honorInfo_all")
-    public List<HonorInfoModel> honorInfoModelList() {
+    public List<HonorInfoModel> getHonorInfoModelList() {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findAll();
         for (int i = 0; i < honorInfoList.size() - 1; i++){
@@ -79,7 +79,7 @@ public class HonorInfoController {
     }
 
     @GetMapping("/api/manager/get_honorInfo_status")
-    public List<HonorInfoModel> getHonorInfoFromStdtus(HonorInfo.Status status) {
+    public List<HonorInfoModel> getHonorInfoFromStatus(HonorInfo.Status status) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findHonorInfoByStatus(status);
         for (int i = 0; i < honorInfoList.size() - 1; i++){

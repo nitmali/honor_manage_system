@@ -11,7 +11,7 @@ import java.util.List;
  * @date 2018/3/14 23:21
  */
 @Repository
-public interface StudentRepository extends CrudRepository<StudentInfo,Long> {
+public interface StudentInfoRepository extends CrudRepository<StudentInfo,Long> {
 
     /**
      * 根据学生学号查询学生信息

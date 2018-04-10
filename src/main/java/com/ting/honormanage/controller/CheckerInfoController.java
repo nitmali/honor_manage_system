@@ -21,12 +21,12 @@ public class CheckerInfoController {
     private CheckerInfoRepository checkerInfoRepository;
 
     @GetMapping("/api/manager/get_checkerInfo_id")
-    public CheckerInfoModel checkerInfoFromId(Long id) {
+    public CheckerInfoModel getCheckerInfoFromId(Long id) {
         return new CheckerInfoModel(checkerInfoRepository.findCheckerInfoById(id));
     }
 
     @GetMapping("/api/manager/get_checkerInfo_all")
-    public List<CheckerInfoModel> checkerInfoList() {
+    public List<CheckerInfoModel> getCheckerInfoList() {
         List<CheckerInfoModel> checkerInfoModelArrayList = new ArrayList<>();
         List<CheckerInfo> checkerInfoList = (List<CheckerInfo>) checkerInfoRepository.findAll();
         for (int i = 0; i < checkerInfoList.size() - 1; i++) {

@@ -146,9 +146,9 @@ public class HonorInfoModel {
     }
 
     public HonorInfo.Status statusOfHonorInfo() {
-        String statusEffective = "有效";
+        String statusEFFECTIVE = "有效";
         String statusINVALID = "失效";
-        if (statusEffective.equals(this.status)) {
+        if (statusEFFECTIVE.equals(this.status)) {
             return HonorInfo.Status.EFFECTIVE;
         } else if (statusINVALID.equals(this.status)) {
             return HonorInfo.Status.INVALID;
