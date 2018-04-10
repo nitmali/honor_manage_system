@@ -1,13 +1,18 @@
 package com.ting.honormanage.controller;
 
 import com.ting.honormanage.entity.ManagerInfo;
+import com.ting.honormanage.model.ChangePasswordModel;
+import com.ting.honormanage.model.UserModel;
 import com.ting.honormanage.repository.ManagerInfoRepository;
+import org.hibernate.Session;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -58,5 +63,19 @@ public class ManagerInfoController {
     @GetMapping("/api/manager/get_managerInfo_all")
     public List<ManagerInfo> getManagerInfoAll() {
         return (List<ManagerInfo>) managerInfoRepository.findAll();
+    }
+
+    @PostMapping("/api/manager/change_managerPassword")
+    public String changeManagerPassword(@RequestBody ChangePasswordModel changePasswordModel, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        ManagerInfo managerInfo = managerInfoRepository
+                .findManagerInfoByUsername((String) session.getAttribute("userName"));
+        if (changePasswordModel.getOldPassword().equals(managerInfo.getPassword())) {
+            managerInfo.setPassword(changePasswordModel.getNewPassword());
+            managerInfoRepository.save(managerInfo);
+            return "{\"message\":\"change password success\"}";
+        } else {
+            return "{\"message\":\"old password error\"}";
+        }
     }
 }

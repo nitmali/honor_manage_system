@@ -24,6 +24,6 @@ public interface ReportRecordRepository extends CrudRepository<ReportRecord,Long
 
     List<ReportRecord> findReportRecordByHonorInfo(HonorInfo honorInfo);
 
-    List<ReportRecord> findReportRecordByStudentInfoAndAndHonorInfo(StudentInfo studentInfo,HonorInfo honorInfo);
+    List<ReportRecord> findReportRecordByStudentInfoAndHonorInfo(StudentInfo studentInfo,HonorInfo honorInfo);
 
 }

@@ -1,13 +1,15 @@
 package com.ting.honormanage.model;
 
 import com.ting.honormanage.entity.CheckerInfo;
+import org.springframework.stereotype.Component;
 
 /**
  * @author nitmali@126.com
  * @date 2018/4/9 19:28
  */
-public class CheckerInfoModel {
 
+@Component
+public class CheckerInfoModel {
     private Long id;
 
     private String username;

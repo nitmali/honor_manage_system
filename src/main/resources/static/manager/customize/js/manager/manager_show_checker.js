@@ -21,7 +21,7 @@ var checkerModalApp = new Vue({
         },
         delete_checkerInfo: function (checkerInfo) {
             $.ajax({
-                url: '/delete_checkerInfo',
+                url: '/api/manager/delete_checkerInfo',
                 type: 'POST',
                 data: JSON.stringify(checkerModalApp.checkerInfo, null, 4),
                 contentType: "application/json",
