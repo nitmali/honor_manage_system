@@ -28,23 +28,23 @@ public class ReportRecordController {
     @Resource
     private HonorInfoRepository honorInfoRepository;
 
-    @GetMapping("/get_reportRecord_all")
+    @GetMapping("/api/manager_checker/get_reportRecord_all")
     public List<ReportRecord> reportRecordList() {
         return (List<ReportRecord>) reportRecordRepository.findAll();
     }
 
-    @GetMapping("/get_reportRecord_id")
+    @GetMapping("/api/manager_checker/get_reportRecord_id")
     public ReportRecord getReportRecordFromId(Long id) {
         return reportRecordRepository.findReportRecordById(id);
     }
 
-    @GetMapping("/get_reportRecord_status")
+    @GetMapping("/api/manager_checker/get_reportRecord_status")
     public List<ReportRecord> reportRecordListOfStatus(ReportRecord.Status status)
     {
         return reportRecordRepository.findReportRecordByStatus(status);
     }
 
-    @GetMapping("/get_reportRecord_studentInfo")
+    @GetMapping("/api/manager_checker/get_reportRecord_studentInfo")
     public List<ReportRecord> reportRecordListOfStudentInfo(Long studentId)
     {
         StudentInfo studentInfo = studentRepository.findStudentInfoById(studentId);
@@ -52,14 +52,14 @@ public class ReportRecordController {
     }
 
 
-    @GetMapping("/get_reportRecord_honorInfo")
+    @GetMapping("/api/manager_checker/get_reportRecord_honorInfo")
     public List<ReportRecord> reportRecordListOfHonorInfo(Long honorId)
     {
         HonorInfo honorInfo = honorInfoRepository.findHonorInfoById(honorId);
         return reportRecordRepository.findReportRecordByHonorInfo(honorInfo);
     }
 
-    @GetMapping("/get_reportRecord_studentInfo_honorInfo")
+    @GetMapping("/api/manager_checker/get_reportRecord_studentInfo_honorInfo")
     public List<ReportRecord> reportRecordListOfStudentInfoAddHonorInfo(Long studentId,Long honorId)
     {
         StudentInfo studentInfo = studentRepository.findStudentInfoById(studentId);
@@ -68,14 +68,14 @@ public class ReportRecordController {
     }
 
 
-    @PostMapping("/add_reportRecord")
+    @PostMapping("/api/manager_checker/add_reportRecord")
     public String addReportRecord(@RequestBody ReportRecord reportRecord)
     {
         reportRecordRepository.save(reportRecord);
         return "{\"message\":\"add reportRecord success\"}";
     }
 
-    @PostMapping("/update_reportRecord")
+    @PostMapping("/api/manager_checker/update_reportRecord")
     public String updateReportRecord(@RequestBody ReportRecord reportRecord)
     {
         ReportRecord reportRecord1 = reportRecordRepository.findReportRecordById(reportRecord.getId());

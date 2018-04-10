@@ -11,7 +11,7 @@ var honorModalApp = new Vue({
     },
     methods: {
         get_honorInfo_one: function (id) {
-            $.get("/get_honorInfo_id",
+            $.get("/api/manager/get_honorInfo_id",
                 {
                     id: id
                 },
@@ -21,7 +21,7 @@ var honorModalApp = new Vue({
         },
         delete_honorInfo: function (honorInfo) {
             $.ajax({
-                url: '/delete_honorInfo',
+                url: '/api/manager/delete_honorInfo',
                 type: 'POST',
                 data: JSON.stringify(honorModalApp.honorInfo, null, 4),
                 contentType: "application/json",
@@ -40,7 +40,7 @@ var honorModalApp = new Vue({
         ,
         update_honorInfo: function (honorInfo) {
             $.ajax({
-                url: '/update_honorInfo',
+                url: '/api/manager/update_honorInfo',
                 type: 'POST',
                 data: JSON.stringify(honorModalApp.honorInfo, null, 4),
                 contentType: "application/json",
@@ -91,7 +91,7 @@ function getDataTable() {
             processing: true,
             aLengthMenu: [5, 10, 25, 50], //更改显示记录数选项
             ajax: {
-                url: "/get_honorInfo_all",
+                url: "/api/manager/get_honorInfo_all",
                 type: 'GET',
                 dataSrc: ""
             },

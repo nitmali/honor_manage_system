@@ -34,7 +34,7 @@ function getDataTable() {
             processing: true,
             aLengthMenu: [5, 10, 25, 50], //更改显示记录数选项
             ajax: {
-                url: "/get_studentInfo_all",
+                url: "/api/manager/get_studentInfo_all",
                 type: 'GET',
                 dataSrc: ""
             },

@@ -21,23 +21,23 @@ public class StudentController {
     @Resource
     private StudentRepository studentRepository;
 
-    @GetMapping("/get_studentInfo_all")
+    @GetMapping("/api/manager/get_studentInfo_all")
     public List<StudentInfo> studentInfoList() {
         return (List<StudentInfo>) studentRepository.findAll();
     }
 
-    @GetMapping("/get_studentInfo_number")
+    @GetMapping("/api/manager/get_studentInfo_number")
     public StudentInfo getStudentFromNumber(String number) {
         return studentRepository.findStudentInfoByNumber(number);
     }
 
-    @GetMapping("/get_studentInfo_name")
+    @GetMapping("/api/manager/get_studentInfo_name")
     public List<StudentInfo> getStudentFromName(String name) {
         System.err.println(name);
         return (List<StudentInfo>) studentRepository.findStudentInfoByName(name);
     }
 
-    @PostMapping("/add_studentInfo")
+    @PostMapping("/api/manager/add_studentInfo")
     public String addStudentInfo(@RequestBody StudentInfo studentInfo) {
 
         StudentInfo studentInfo1 = studentRepository.findStudentInfoByNumber(studentInfo.getNumber());
@@ -49,7 +49,7 @@ public class StudentController {
         return "{\"message\":\"add studentInfo success\"}";
     }
 
-    @PostMapping("/update_studentInfo")
+    @PostMapping("/api/manager/update_studentInfo")
     public String updateStudentInfo(@RequestBody StudentInfo studentInfo) {
         StudentInfo studentInfo1 = studentRepository.findStudentInfoByNumber(studentInfo.getNumber());
         if (studentInfo1 == null) {
@@ -61,7 +61,7 @@ public class StudentController {
         return "{\"message\":\"update studentInfo success\"}";
     }
 
-    @GetMapping("/delete_studentInfo")
+    @GetMapping("/api/manager/delete_studentInfo")
     public String deleteStudentInfo(String number) {
         StudentInfo studentInfo = studentRepository.findStudentInfoByNumber(number);
         {

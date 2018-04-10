@@ -20,12 +20,12 @@ public class CheckerInfoController {
     @Resource
     private CheckerInfoRepository checkerInfoRepository;
 
-    @GetMapping("/get_checkerInfo_id")
+    @GetMapping("/api/manager/get_checkerInfo_id")
     public CheckerInfoModel checkerInfoFromId(Long id) {
         return new CheckerInfoModel(checkerInfoRepository.findCheckerInfoById(id));
     }
 
-    @GetMapping("/get_checkerInfo_all")
+    @GetMapping("/api/manager/get_checkerInfo_all")
     public List<CheckerInfoModel> checkerInfoList() {
         List<CheckerInfoModel> checkerInfoModelArrayList = new ArrayList<>();
         List<CheckerInfo> checkerInfoList = (List<CheckerInfo>) checkerInfoRepository.findAll();
@@ -36,7 +36,7 @@ public class CheckerInfoController {
         return checkerInfoModelArrayList;
     }
 
-    @GetMapping("/get_checkerInfo_name")
+    @GetMapping("/api/manager/get_checkerInfo_name")
     public List<CheckerInfoModel> getCheckerInfoFromName(String name) {
         List<CheckerInfoModel> checkerInfoModelArrayList = new ArrayList<>();
         List<CheckerInfo> checkerInfoList = (List<CheckerInfo>) checkerInfoRepository.findCheckerInfoByName(name);
@@ -47,7 +47,7 @@ public class CheckerInfoController {
         return checkerInfoModelArrayList;
     }
 
-    @GetMapping("/get_checkerInfo_username")
+    @GetMapping("/api/manager/get_checkerInfo_username")
     public String getCheckerInfoFromUsername(String username) {
         CheckerInfo checkerInfo = checkerInfoRepository.findCheckerInfoByUsername(username);
         if (checkerInfo == null) {
@@ -57,7 +57,7 @@ public class CheckerInfoController {
         }
     }
 
-    @GetMapping("/get_checkerInfo_phone")
+    @GetMapping("/api/manager/get_checkerInfo_phone")
     public List<CheckerInfoModel> getCheckerInfoFromPhone(String phone) {
         List<CheckerInfoModel> checkerInfoModelArrayList = new ArrayList<>();
         List<CheckerInfo> checkerInfoList = checkerInfoRepository.findCheckerInfoByPhone(phone);
@@ -68,7 +68,7 @@ public class CheckerInfoController {
         return checkerInfoModelArrayList;
     }
 
-    @GetMapping("/get_checkerInfo_authority")
+    @GetMapping("/api/manager/get_checkerInfo_authority")
     public List<CheckerInfoModel> getCheckerInfoFromAuthority(String authority) {
         List<CheckerInfoModel> checkerInfoModelArrayList = new ArrayList<>();
         List<CheckerInfo> checkerInfoList = (List<CheckerInfo>) checkerInfoRepository.findCheckerInfoByAuthority(authority);
@@ -79,7 +79,7 @@ public class CheckerInfoController {
         return checkerInfoModelArrayList;
     }
 
-    @PostMapping("/add_checkerInfo")
+    @PostMapping("/api/manager/add_checkerInfo")
     public String addCheckerInfo(@RequestBody CheckerInfoModel checkerInfoModel) {
         CheckerInfo checkerInfo1 = checkerInfoRepository.findCheckerInfoByUsername(checkerInfoModel.getUsername());
         if (checkerInfo1 != null) {
@@ -91,7 +91,7 @@ public class CheckerInfoController {
         }
     }
 
-    @PostMapping("/update_checkerInfo")
+    @PostMapping("/api/manager/update_checkerInfo")
     public String updateCheckerInfo(@RequestBody CheckerInfoModel checkerInfoModel) {
         CheckerInfo checkerInfo1 = checkerInfoRepository.findCheckerInfoById(checkerInfoModel.getId());
         if (checkerInfo1 == null) {
@@ -106,7 +106,7 @@ public class CheckerInfoController {
         return "{\"message\":\"update checkerInfo success\"}";
     }
 
-    @PostMapping("/delete_checkerInfo")
+    @PostMapping("/api/manager/delete_checkerInfo")
     public String deleteCheckerInfo(@RequestBody CheckerInfoModel checkerInfoModel) {
         checkerInfoRepository.delete(checkerInfoModel.getId());
         return "{\"message\":\"delete checkerInfo success\"}";

@@ -8,7 +8,7 @@ var managerLoginApp = new Vue({
             if (this.userModel.userName !== undefined && this.userModel.password !== undefined) {
                 this.userModel.userType = "manager";
                 $.ajax({
-                    url: '/post_manager_login',
+                    url: '/api/post_manager_login',
                     type: 'POST',
                     data: JSON.stringify(managerLoginApp.userModel, null, 4),
                     contentType: "application/json",

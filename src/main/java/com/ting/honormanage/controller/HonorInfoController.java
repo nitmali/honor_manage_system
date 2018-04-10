@@ -15,14 +15,14 @@ import java.util.List;
 
 /**
  * @author nitmali@126.com
- * @date 2018/3/31 14:29
+ * @date 2018/api/manager/3/api/manager/31 14:29
  */
 @RestController
 public class HonorInfoController {
     @Resource
     private HonorInfoRepository honorInfoRepository;
 
-    @GetMapping("/get_honorInfo_all")
+    @GetMapping("/api/manager/get_honorInfo_all")
     public List<HonorInfoModel> honorInfoModelList() {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findAll();
@@ -33,14 +33,14 @@ public class HonorInfoController {
             return honorInfoModelArrayList;
     }
 
-    @PostMapping("/add_honorInfo")
+    @PostMapping("/api/manager/add_honorInfo")
     public String addHonorInfo(@RequestBody HonorInfoModel honorInfoModel) {
         HonorInfo honorInfo = new HonorInfo(honorInfoModel);
         honorInfoRepository.save(honorInfo);
         return "{\"message\":\"add honorInfo success\"}";
     }
 
-    @GetMapping("/get_honorInfo_yearBetween")
+    @GetMapping("/api/manager/get_honorInfo_yearBetween")
     public List<HonorInfoModel> getHonorInfoFromYearBetween(Date year1, Date year2) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findHonorInfoByYearBetween(year1, year2);
@@ -51,12 +51,12 @@ public class HonorInfoController {
         return honorInfoModelArrayList;
     }
 
-    @GetMapping("/get_honorInfo_id")
+    @GetMapping("/api/manager/get_honorInfo_id")
     public HonorInfoModel getHonorInfoFromId(Long id) {
         return new HonorInfoModel(honorInfoRepository.findHonorInfoById(id));
     }
 
-    @GetMapping("/get_honorInfo_name")
+    @GetMapping("/api/manager/get_honorInfo_name")
     public List<HonorInfoModel> getHonorInfoFromName(String name) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findHonorInfoByName(name);
@@ -67,7 +67,7 @@ public class HonorInfoController {
         return honorInfoModelArrayList;
     }
 
-    @GetMapping("/get_honorInfo_kind")
+    @GetMapping("/api/manager/get_honorInfo_kind")
     public List<HonorInfoModel> getHonorInfoFromKind(HonorInfo.Kind kind) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findHonorInfoByKind(kind);
@@ -78,7 +78,7 @@ public class HonorInfoController {
         return honorInfoModelArrayList;
     }
 
-    @GetMapping("/get_honorInfo_status")
+    @GetMapping("/api/manager/get_honorInfo_status")
     public List<HonorInfoModel> getHonorInfoFromStdtus(HonorInfo.Status status) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findHonorInfoByStatus(status);
@@ -89,7 +89,7 @@ public class HonorInfoController {
         return honorInfoModelArrayList;
     }
 
-    @PostMapping("/update_honorInfo")
+    @PostMapping("/api/manager/update_honorInfo")
     public String updateHonorInfo(@RequestBody HonorInfoModel honorInfoModel) {
         HonorInfo honorInfo1 = honorInfoRepository.findHonorInfoById(honorInfoModel.getId());
         {

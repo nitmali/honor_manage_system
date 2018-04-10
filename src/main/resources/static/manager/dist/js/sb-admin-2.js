@@ -45,3 +45,9 @@ $(function() {
         }
     }
 });
+
+function logout() {
+
+}
+
+

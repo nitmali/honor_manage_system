@@ -21,7 +21,7 @@ var addCheckerApp = new Vue({
                         addCheckerApp.checkerInfo.password = md5(md5(addCheckerApp.checkerInfo.password) + '8');
                         addCheckerApp.checkerInfo.password = md5(md5(addCheckerApp.checkerInfo.password) + '8');
                         $.ajax({
-                            url: '/add_checkerInfo',
+                            url: '/api/manager/add_checkerInfo',
                             type: 'POST',
                             data: JSON.stringify(addCheckerApp.checkerInfo, null, 4),
                             contentType: "application/json",
@@ -39,8 +39,6 @@ var addCheckerApp = new Vue({
                     } else {
                         alert("用户名已存在");
                     }
-
-
                 }
             } else {
                 alert("请填写完整信息");
@@ -73,7 +71,7 @@ var addCheckerApp = new Vue({
             }
         },
         get_username: function () {
-            $.get("/get_checkerInfo_username",
+            $.get("/api/manager/get_checkerInfo_username",
                 {
                     username: addCheckerApp.checkerInfo.username
                 },
@@ -90,7 +88,5 @@ var addCheckerApp = new Vue({
             this.checkerInfo = {};
             this.passwordAgain = '';
         }
-
-
     }
 });

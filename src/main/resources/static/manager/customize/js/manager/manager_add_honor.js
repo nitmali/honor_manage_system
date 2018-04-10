@@ -12,7 +12,7 @@ var addHonorApp = new Vue({
                 && this.honorInfo.year !== undefined
                 && this.honorInfo.status !== undefined) {
                 $.ajax({
-                    url: '/add_honorInfo',
+                    url: '/api/manager/add_honorInfo',
                     type: 'POST',
                     data: JSON.stringify(addHonorApp.honorInfo, null, 4),
                     contentType: "application/json",

@@ -3,10 +3,7 @@ package com.ting.honormanage.controller;
 import com.ting.honormanage.entity.ManagerInfo;
 import com.ting.honormanage.model.UserModel;
 import com.ting.honormanage.repository.ManagerRepository;
-import org.apache.catalina.Manager;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +19,7 @@ public class LoginController {
     @Resource
     private ManagerRepository managerRepository;
 
-    @PostMapping("/post_manager_login")
+    @PostMapping("/api/post_manager_login")
     public String managerLogin(@RequestBody UserModel userModel, HttpServletRequest request) {
         HttpSession session = request.getSession();
         ManagerInfo managerInfo = managerRepository.findManagerInfoByUsername(userModel.getUserName());
@@ -37,5 +34,4 @@ public class LoginController {
             return "{\"message\":\"password error\"}";
         }
     }
-
 }

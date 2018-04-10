@@ -11,7 +11,7 @@ var checkerModalApp = new Vue({
     },
     methods: {
         get_checkerInfo_id: function (id) {
-            $.get("/get_checkerInfo_id",
+            $.get("/api/manager/get_checkerInfo_id",
                 {
                     id: id
                 },
@@ -46,7 +46,7 @@ var checkerModalApp = new Vue({
                 }
 
                 $.ajax({
-                    url: '/update_checkerInfo',
+                    url: '/api/manager/update_checkerInfo',
                     type: 'POST',
                     data: JSON.stringify(checkerModalApp.checkerInfo, null, 4),
                     contentType: "application/json",
@@ -121,7 +121,7 @@ function getDataTable() {
             processing: true,
             aLengthMenu: [5, 10, 25, 50], //更改显示记录数选项
             ajax: {
-                url: "/get_checkerInfo_all",
+                url: "/api/manager/get_checkerInfo_all",
                 type: 'GET',
                 dataSrc: ""
             },
