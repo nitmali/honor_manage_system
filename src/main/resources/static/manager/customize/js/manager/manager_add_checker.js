@@ -18,6 +18,8 @@ var addCheckerApp = new Vue({
                 if (addCheckerApp.verification_phone() && addCheckerApp.verification_password()
                     && addCheckerApp.verification_username()) {
                     if (addCheckerApp.checkerInfo) {
+                        addCheckerApp.checkerInfo.password = md5(md5(addCheckerApp.checkerInfo.password) + '8');
+                        addCheckerApp.checkerInfo.password = md5(md5(addCheckerApp.checkerInfo.password) + '8');
                         $.ajax({
                             url: '/add_checkerInfo',
                             type: 'POST',

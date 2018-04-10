@@ -40,6 +40,11 @@ var checkerModalApp = new Vue({
         ,
         update_checkerInfo: function (checkerInfo) {
             if (checkerModalApp.verification_phone() && checkerModalApp.verification_password()) {
+                if (checkerModalApp.checkerInfo.password !== null) {
+                    checkerModalApp.checkerInfo.password = md5(md5(checkerModalApp.checkerInfo.password) + '8');
+                    checkerModalApp.checkerInfo.password = md5(md5(checkerModalApp.checkerInfo.password) + '8');
+                }
+
                 $.ajax({
                     url: '/update_checkerInfo',
                     type: 'POST',
@@ -60,12 +65,16 @@ var checkerModalApp = new Vue({
 
         },
         verification_password: function () {
-            if ((checkerModalApp.checkerInfo.password.length < 6 || checkerModalApp.checkerInfo.password.length > 16)
-                && checkerModalApp.checkerInfo.password !== '') {
-                alert("请输入6~16位密码");
+            if (checkerModalApp.checkerInfo.password !== '' && checkerModalApp.checkerInfo.password !== null) {
+                if (checkerModalApp.checkerInfo.password.length < 6 || checkerModalApp.checkerInfo.password.length > 16) {
+                    alert("请输入6~16位密码");
+                } else {
+                    return true;
+                }
             } else {
                 return true;
             }
+
         },
         verification_phone: function () {
             if (checkerModalApp.checkerInfo.phone.length !== 11 && checkerModalApp.checkerInfo.phone.length !== 6

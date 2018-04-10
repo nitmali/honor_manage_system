@@ -97,7 +97,7 @@ public class CheckerInfoController {
         if (checkerInfo1 == null) {
             return "{\"message\":\"checker not find\"}";
         } else {
-            if ("".equals(checkerInfoModel.getPassword())) {
+            if (checkerInfoModel.getPassword() == null) {
                 checkerInfoModel.setPassword(checkerInfo1.getPassword());
             }
             checkerInfo1.setCheckerInfoFromModel(checkerInfoModel);

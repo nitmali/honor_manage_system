@@ -26,7 +26,7 @@ public class CheckerInfoModel {
     public CheckerInfoModel(CheckerInfo checkerInfo) {
         this.id = checkerInfo.idOfCheckerInfoModel();
         this.username = checkerInfo.usernameOfCheckerInfoModel();
-        this.password = checkerInfo.passwordOfCheckerInfoModel();
+        this.password = null;
         this.name = checkerInfo.nameOfCheckerInfoModel();
         this.phone = checkerInfo.phoneOfCheckerInfoModel();
         this.authority = checkerInfo.authorityOfCheckerInfoModel();
