@@ -1,7 +1,8 @@
 var changeCheckerPasswordApp = new Vue({
     el: "#changeCheckerPasswordApp",
     data: {
-        changePassword: {}
+        changePassword: {},
+        newPasswordAgain:''
     },
     methods: {
         change_password: function () {
@@ -15,8 +16,7 @@ var changeCheckerPasswordApp = new Vue({
                     success: function (data) {
                         if (data.message === "change password success") {
                             alert("修改成功");
-                            changeCheckerPasswordApp.changePassword = '';
-                            changeCheckerPasswordApp.newPasswordAgain = '';
+                            changeCheckerPasswordApp.reset_data();
                         }else if(data.message === "old password error"){
                             alert("原密码错误");
                         }
@@ -33,7 +33,7 @@ var changeCheckerPasswordApp = new Vue({
             }
         },
         reset_data:function () {
-            changeCheckerPasswordApp.changePassword = '';
+            changeCheckerPasswordApp.changePassword = {};
             changeCheckerPasswordApp.newPasswordAgain = '';
         }
     }

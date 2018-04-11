@@ -23,6 +23,12 @@ public class CheckerInfoController {
     @Resource
     private CheckerInfoRepository checkerInfoRepository;
 
+    @GetMapping("/api/checker/get_checkerInfo")
+    public CheckerInfoModel getCheckerInfo(HttpServletRequest request) {
+        return new CheckerInfoModel(checkerInfoRepository
+                .findCheckerInfoByUsername((String) request.getSession().getAttribute("userName")));
+    }
+
     @GetMapping("/api/manager/get_checkerInfo_id")
     public CheckerInfoModel getCheckerInfoFromId(Long id) {
         return new CheckerInfoModel(checkerInfoRepository.findCheckerInfoById(id));

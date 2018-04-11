@@ -1,7 +1,8 @@
 var changeManagerPasswordApp = new Vue({
     el: "#changeManagerPasswordApp",
     data: {
-        changePassword: {}
+        changePassword: {},
+        newPasswordAgain:''
     },
     methods: {
         change_password: function () {
@@ -15,8 +16,7 @@ var changeManagerPasswordApp = new Vue({
                     success: function (data) {
                         if (data.message === "change password success") {
                             alert("修改成功");
-                            changeManagerPasswordApp.changePassword = '';
-                            changeManagerPasswordApp.newPasswordAgain = '';
+                            changeManagerPasswordApp.reset_data();
                         }else if(data.message === "old password error"){
                             alert("原密码错误");
                         }
@@ -33,7 +33,7 @@ var changeManagerPasswordApp = new Vue({
             }
         },
         reset_data:function () {
-            changeManagerPasswordApp.changePassword = '';
+            changeManagerPasswordApp.changePassword = {};
             changeManagerPasswordApp.newPasswordAgain = '';
         }
     }

@@ -1,10 +1,13 @@
 var checkerModalApp = new Vue({
     el: '#checkerModalApp',
     data: {
-        checkerInfo: ''
+        checkerInfo: {}
+    },
+    created: function () {
+        this.get_information();
     },
     methods: {
-        change_information: function (checkerInfo) {
+        update_information: function (checkerInfo) {
             $.ajax({
                 url: '/api/manager/update_checkerInfo',
                 type: 'POST',
@@ -23,7 +26,14 @@ var checkerModalApp = new Vue({
             });
         },
         reset_data:function () {
-            this.checkerInfo = {};
+            this.get_information();
+        },
+        get_information:function () {
+            $.get("/api/checker/get_checkerInfo",
+                {},
+                function (checkerInfo) {
+                    checkerModalApp.checkerInfo = checkerInfo;
+                });
         }
     }
 });

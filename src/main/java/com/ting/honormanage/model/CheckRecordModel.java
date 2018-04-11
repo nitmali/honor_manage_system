@@ -3,9 +3,11 @@ package com.ting.honormanage.model;
 import com.ting.honormanage.entity.CheckRecord;
 import com.ting.honormanage.entity.CheckerInfo;
 import com.ting.honormanage.entity.ReportRecord;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+@Component
 public class CheckRecordModel {
     private Long id;
 
