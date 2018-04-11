@@ -20,16 +20,17 @@ var reportRecordModalApp = new Vue({
                 });
         }
         ,
-        update_reportRecord: function (reportRecord) {
+        check_reportRecord: function (status) {
+            reportRecordModalApp.reportRecord.status = status;
             $.ajax({
-                url: '/api/manager_checker/update_reportRecord',
+                url: '/api/checker/check_reportRecord',
                 type: 'POST',
                 data: JSON.stringify(reportRecordModalApp.reportRecord, null, 4),
                 contentType: "application/json",
                 dataType: "json",
                 success: function (data) {
-                    if (data.message === "update reportRecord success") {
-                        alert("修改成功");
+                    if (data.message === "check reportRecord success") {
+                        alert("审核成功");
                         location.reload();
                     }
                 },
@@ -37,6 +38,12 @@ var reportRecordModalApp = new Vue({
                     alert(XMLResponse.responseText);
                 }
             });
+        },
+        check_reportRecord_PASS:function () {
+            reportRecordModalApp.check_reportRecord("PASS");
+        },
+        check_reportRecord_NOT_PASS:function () {
+            reportRecordModalApp.check_reportRecord("NOT_PASS");
         }
     }
 });
@@ -79,29 +86,39 @@ function getDataTable() {
             },
             columns: [
                 {data: "id"},
-                {data: "studentInfo.number"},
-                {data: "studentInfo.name"},
-                {data: "studentInfo.sex"},
-                {data: "studentInfo.college"},
-                {data: "studentInfo.grade"},
-                {data: "studentInfo.major"},
-                {data: "studentInfo.class"},
-                {data: "honorInfo.name"},
-                {data: "honorInfo.level"},
-                {data: "honorInfo.kind"},
-                {data: "honorInfo.rank"},
-                {data: "honorInfo.year"},
-                {data: "recordTime"},
-                {data: "annex"},
+                {data: "studentInfoNumber"},
+                {data: "studentInfoName"},
+                {data: "studentInfoSex"},
+                {data: "studentInfoCollege"},
+                // {data: "studentInfoGrade"},
+                // {data: "studentInfoMajor"},
+                // {data: "studentInfoClass"},
+                {data: ""},
+                {data: "honorInfoName"},
+                // {data: "honorInfoLevel"},
+                // {data: "honorInfoKind"},
+                // {data: "honorInfoRank"},
+                // {data: "honorInfoYear"},
+                // {data: "recordTime"},
+                // {data: "annex"},
                 {data: "status"}
             ],
-            columnDefs: []
+            columnDefs: [
+                {
+                    targets: 5,
+                    render: function (data, type, row, meta) {
+                        return row.studentInfoMajor
+                            + row.studentInfoGrade.slice(0,2)
+                            + row.studentInfoClass.slice(0,1);
+                    }
+                }
+            ]
         });
 
     $('#checker_show_record_table tbody').on('click', 'tr', function () {
         // console.log(table.row(this).data());
         var reportRecord = table.row(this).data();
-        reportRecordModalApp.get_reportRecord_id(reportRecord.id)
+        reportRecordModalApp.get_reportRecord_id(reportRecord.id);
         $("#reportRecordModalApp").modal();
     });
 }

@@ -105,22 +105,22 @@
                                id="checker_show_record_table">
                             <thead>
                             <tr>
-                                <th>申报记录编号</th>
+                                <th>编号</th>
                                 <th>学号</th>
                                 <th>姓名</th>
                                 <th>性别</th>
                                 <th>学院</th>
-                                <th>年级</th>
-                                <th>专业</th>
-                                <th>班级</th>
-                                <th>荣誉级别</th>
-                                <th>荣誉类别</th>
+                                <!--<th>年级</th>-->
+                                <!--<th>专业</th>-->
+                                <!--<th>班级</th>-->
+                                <th>专业班级</th>
                                 <th>荣誉名称</th>
-                                <th>荣誉名次</th>
-                                <th>获奖学年</th>
-                                <th>附件</th>
+                                <!--<th>荣誉级别</th>-->
+                                <!--<th>荣誉类别</th>-->
+                                <!--<th>荣誉名次</th>-->
+                                <!--<th>获奖学年</th>-->
+                                <!--<th>附件</th>-->
                                 <th>申报时间</th>
-                                <th>申报记录状态</th>
                             </tr>
                             </thead>
                         </table>
@@ -141,7 +141,9 @@
         <div class="modal-content">
             <!-- 模态框头部 -->
             <div class="modal-header">
-                <h3 class="modal-title" style="text-align: center">荣誉:{{}}</h3>
+                <h3 class="modal-title" style="text-align: center">
+                    审核:{{reportRecord.studentInfoName}} &nbsp; {{reportRecord.honorInfoName}}
+                </h3>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -151,102 +153,98 @@
                     <div class="col-lg-10 col-lg-offset-1">
                         <form class="national-day-plan-form">
                             <div style="width: 100%;margin: auto;">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="studentInfoNumber">学号</label>
+                                                <input type="text" class="form-control" id="studentInfoNumber"
+                                                       v-model="reportRecord.studentInfoNumber" readonly>
+                                            </div>
 
-                                <div class="form-group">
-                                    <label for="id">申报记录编号</label>
-                                    <input type="text" class="form-control" id="id"
-                                           v-model="reportRecord.id" readonly>
+                                            <div class="form-group">
+                                                <label for="studentInfoName">姓名</label>
+                                                <input type="text" class="form-control" id="studentInfoName"
+                                                       v-model="reportRecord.studentInfoName" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="studentInfoSex">性别</label>
+                                                <input type="text" class="form-control" id="studentInfoSex"
+                                                       v-model="reportRecord.studentInfoSex" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="studentInfoCollege">学院</label>
+                                                <input type="text" class="form-control" id="studentInfoCollege"
+                                                       v-model="reportRecord.studentInfoCollege" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="studentInfoGrade">年级</label>
+                                                <input type="text" class="form-control" id="studentInfoGrade"
+                                                       v-model="reportRecord.studentInfoGrade" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="studentInfoMajor">专业</label>
+                                                <input type="text" class="form-control" id="studentInfoMajor"
+                                                       v-model="reportRecord.studentInfoMajor" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="studentInfoClass">班级</label>
+                                                <input type="text" class="form-control" id="studentInfoClass"
+                                                       v-model="reportRecord.studentInfoClass" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label for="honorInfoLevel">荣誉级别</label>
+                                                <input type="text" class="form-control" id="honorInfoLevel"
+                                                       v-model="reportRecord.honorInfoLevel" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="honorInfoKind">荣誉类别</label>
+                                                <input type="text" class="form-control" id="honorInfoKind"
+                                                       v-model="reportRecord.honorInfoKind" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="honorInfoName">荣誉名称</label>
+                                                <input type="text" class="form-control" id="honorInfoName"
+                                                       v-model="reportRecord.honorInfoName" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="honorInfoRank">荣誉名次</label>
+                                                <input type="text" class="form-control" id="honorInfoRank"
+                                                       v-model="reportRecord.honorInfoRank" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="honorInFoYear">获奖学年</label>
+                                                <input type="text" class="form-control" id="honorInFoYear"
+                                                       v-model="reportRecord.honorInfoYear" readonly>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label for="annex">申报时间</label>
+                                                <input type="text" class="form-control" id="annex"
+                                                       v-model="reportRecord.annex" readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="status">申报记录状态</label>
+                                                <input type="text" class="form-control" id="status"
+                                                       v-model="reportRecord.status" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="studentInfonumber">学号</label>
-                                    <input type="text" class="form-control" id="studentInfonumber"
-                                           v-model="reportRecord.studentInfo.number" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="studentInfoname">姓名</label>
-                                    <input type="text" class="form-control" id="studentInfoname"
-                                           v-model="reportRecord.studentInfo.name" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="studentInfosex">性别</label>
-                                    <input type="text" class="form-control" id="studentInfosex"
-                                           v-model="reportRecord.studentInfo.sex" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="studentInfocollege">学院</label>
-                                    <input type="text" class="form-control" id="studentInfocollege"
-                                           v-model="reportRecord.studentInfo.college" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="studentInfograde">年级</label>
-                                    <input type="text" class="form-control" id="studentInfograde"
-                                           v-model="reportRecord.studentInfo.grade" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="studentInfomajor">专业</label>
-                                    <input type="text" class="form-control" id="studentInfomajor"
-                                           v-model="reportRecord.studentInfo.major" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="studentInfoclass">班级</label>
-                                    <input type="text" class="form-control" id="studentInfoclass"
-                                           v-model="reportRecord.studentInfo.class" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="honorInfolevel">荣誉级别</label>
-                                    <input type="text" class="form-control" id="honorInfolevel"
-                                           v-model="reportRecord.honorInfo.level" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="honorInfokind">荣誉类别</label>
-                                    <input type="text" class="form-control" id="honorInfokind"
-                                           v-model="reportRecord.honorInfo.kind" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="honorInfoname">荣誉名称</label>
-                                    <input type="text" class="form-control" id="honorInfoname"
-                                           v-model="reportRecord.honorInfo.name" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="honorInforank">荣誉名次</label>
-                                    <input type="text" class="form-control" id="honorInforank"
-                                           v-model="reportRecord.honorInfo.rank" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="honorInfoyear">获奖学年</label>
-                                    <input type="text" class="form-control" id="honorInfoyear"
-                                           v-model="reportRecord.honorInfo.year" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="recordTime">附件</label>
-                                    <input type="text" class="form-control" id="recordTime"
-                                           v-model="reportRecord.recordTime" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="annex">申报时间</label>
-                                    <input type="text" class="form-control" id="annex"
-                                           v-model="reportRecord.annex" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="status">申报记录状态</label>
-                                    <input type="text" class="form-control" id="status"
-                                           v-model="reportRecord.status" readonly>
-                                </div>
 
                             </div>
                         </form>
@@ -255,12 +253,13 @@
             </div>
 
             <!-- 模态框底部 -->
-            <div class="modal-footer">
+            <div class="check modal-footer">
                 <a type="button" class="btn btn-success"  style="width: 100px"
-                   v-on:click="pass_reportRecord">通过
+                   v-on:click="check_reportRecord_PASS()">通过
                 </a>
+                &emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <a type="button" class="btn btn-danger" data-dismiss="modal" style="width: 100px"
-                   v-on:click="not_pass_reportRecord">不通过
+                   v-on:click="check_reportRecord_NOT_PASS()">不通过
                 </a>
             </div>
 

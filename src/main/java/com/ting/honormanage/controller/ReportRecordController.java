@@ -142,9 +142,12 @@ public class ReportRecordController {
                 } else if (checkerInfo.getAuthority() == CheckerInfo.Authority.SECOND_LEVEL) {
                     reportRecord1.setStatus(ReportRecord.Status.ALREADY_REVIEW);
                 }
-                reportRecordRepository.save(reportRecord1);
+
+            }else if(reportRecordModel.getStatus().equals("NOT_PASS")){
+                reportRecord1.setStatus(ReportRecord.Status.NOT_PASS);
             }
+            reportRecordRepository.save(reportRecord1);
+            return "{\"message\":\"check reportRecord success\"}";
         }
-        return "{\"message\":\"update reportRecord success\"}";
     }
 }
