@@ -10,7 +10,7 @@ var honorModalApp = new Vue({
         honorInfo: ''
     },
     methods: {
-        get_honorInfo_one: function (id) {
+        get_honorInfo_id: function (id) {
             $.get("/api/manager/get_honorInfo_id",
                 {
                     id: id
@@ -59,7 +59,7 @@ var honorModalApp = new Vue({
     }
 });
 
-function getDataTable() {
+    function getDataTable() {
     table = $('#show_honor_table').DataTable(
         {
             language: {
@@ -110,7 +110,7 @@ function getDataTable() {
     $('#show_honor_table tbody').on('click', 'tr', function () {
         // console.log(table.row(this).data());
         var honor = table.row(this).data();
-        honorModalApp.get_honorInfo_one(honor.id)
+        honorModalApp.get_honorInfo_id(honor.id)
         $("#honorModalApp").modal();
     });
 }

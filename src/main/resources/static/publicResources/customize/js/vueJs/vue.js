@@ -4322,7 +4322,7 @@
         vm._c = function (a, b, c, d) {
             return createElement(vm, a, b, c, d, false);
         };
-        // normalization is always applied for the public version, used in
+        // normalization is always applied for the publicResources version, used in
         // user-written render functions.
         vm.$createElement = function (a, b, c, d) {
             return createElement(vm, a, b, c, d, true);
@@ -4874,7 +4874,7 @@
         Object.defineProperty(Vue, 'config', configDef);
 
         // exposed util methods.
-        // NOTE: these are not considered part of the public API - avoid relying on
+        // NOTE: these are not considered part of the publicResources API - avoid relying on
         // them unless you are aware of the risk.
         Vue.util = {
             warn: warn,
@@ -8283,7 +8283,7 @@
 // install platform patch function
     Vue$3.prototype.__patch__ = inBrowser ? patch : noop;
 
-// public mount method
+// publicResources mount method
     Vue$3.prototype.$mount = function (el,
                                        hydrating) {
         el = el && inBrowser ? query(el) : undefined;

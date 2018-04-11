@@ -30,6 +30,9 @@ public class ReportRecord {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    public ReportRecord() {
+    }
+
     public ReportRecord(HonorInfo honorInfo, StudentInfo studentInfo) {
         this.honorInfo = honorInfo;
         this.studentInfo = studentInfo;

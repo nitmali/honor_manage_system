@@ -1,9 +1,12 @@
 package com.ting.honormanage.controller;
 
+import com.ting.honormanage.entity.CheckerInfo;
 import com.ting.honormanage.entity.HonorInfo;
 import com.ting.honormanage.entity.ReportRecord;
 import com.ting.honormanage.entity.StudentInfo;
+import com.ting.honormanage.model.HonorInfoModel;
 import com.ting.honormanage.model.ReportRecordModel;
+import com.ting.honormanage.repository.CheckerInfoRepository;
 import com.ting.honormanage.repository.HonorInfoRepository;
 import com.ting.honormanage.repository.ReportRecordRepository;
 import com.ting.honormanage.repository.StudentInfoRepository;
@@ -32,11 +35,14 @@ public class ReportRecordController {
     @Resource
     private HonorInfoRepository honorInfoRepository;
 
+    @Resource
+    private CheckerInfoRepository checkerInfoRepository;
+
     @GetMapping("/api/manager_checker/get_reportRecord_all")
     public List<ReportRecordModel> getReportRecordList() {
         List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
         List<ReportRecord> reportRecordList = (List<ReportRecord>) reportRecordRepository.findAll();
-        for (int i = 0; i < reportRecordList.size() - 1; i++){
+        for (int i = 0; i < reportRecordList.size() - 1; i++) {
             ReportRecordModel reportRecordModel = new ReportRecordModel(reportRecordList.get(i));
             reportRecordModelArrayList.add(reportRecordModel);
         }
@@ -49,11 +55,10 @@ public class ReportRecordController {
     }
 
     @GetMapping("/api/manager_checker/get_reportRecord_status")
-    public List<ReportRecordModel> getReportRecordListFromStatus(ReportRecord.Status status)
-    {
+    public List<ReportRecordModel> getReportRecordListFromStatus(ReportRecord.Status status) {
         List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
         List<ReportRecord> reportRecordList = reportRecordRepository.findReportRecordByStatus(status);
-        for (int i = 0; i < reportRecordList.size() - 1; i++){
+        for (int i = 0; i < reportRecordList.size() - 1; i++) {
             ReportRecordModel reportRecordModel = new ReportRecordModel(reportRecordList.get(i));
             reportRecordModelArrayList.add(reportRecordModel);
         }
@@ -61,12 +66,11 @@ public class ReportRecordController {
     }
 
     @GetMapping("/api/manager_checker/get_reportRecord_studentInfo")
-    public List<ReportRecordModel> getReportRecordListFromStudentInfo(Long studentId)
-    {
+    public List<ReportRecordModel> getReportRecordListFromStudentInfo(Long studentId) {
         StudentInfo studentInfo = studentInfoRepository.findStudentInfoById(studentId);
         List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
         List<ReportRecord> reportRecordList = reportRecordRepository.findReportRecordByStudentInfo(studentInfo);
-        for (int i = 0; i < reportRecordList.size() - 1; i++){
+        for (int i = 0; i < reportRecordList.size() - 1; i++) {
             ReportRecordModel reportRecordModel = new ReportRecordModel(reportRecordList.get(i));
             reportRecordModelArrayList.add(reportRecordModel);
         }
@@ -75,12 +79,11 @@ public class ReportRecordController {
 
 
     @GetMapping("/api/manager_checker/get_reportRecord_honorInfo")
-    public List<ReportRecordModel> getReportRecordListFromHonorInfo(Long honorId)
-    {
+    public List<ReportRecordModel> getReportRecordListFromHonorInfo(Long honorId) {
         HonorInfo honorInfo = honorInfoRepository.findHonorInfoById(honorId);
         List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
         List<ReportRecord> reportRecordList = reportRecordRepository.findReportRecordByHonorInfo(honorInfo);
-        for (int i = 0; i < reportRecordList.size() - 1; i++){
+        for (int i = 0; i < reportRecordList.size() - 1; i++) {
             ReportRecordModel reportRecordModel = new ReportRecordModel(reportRecordList.get(i));
             reportRecordModelArrayList.add(reportRecordModel);
         }
@@ -88,41 +91,59 @@ public class ReportRecordController {
     }
 
     @GetMapping("/api/manager_checker/get_reportRecord_studentInfo_honorInfo")
-    public List<ReportRecordModel> getReportRecordListFromStudentInfoAndHonorInfo(Long studentId,Long honorId)
-    {
+    public List<ReportRecordModel> getReportRecordListFromStudentInfoAndHonorInfo(Long studentId, Long honorId) {
         StudentInfo studentInfo = studentInfoRepository.findStudentInfoById(studentId);
         HonorInfo honorInfo = honorInfoRepository.findHonorInfoById(honorId);
         List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
-        List<ReportRecord> reportRecordList = reportRecordRepository.findReportRecordByStudentInfoAndHonorInfo(studentInfo,honorInfo);
-        for (int i = 0; i < reportRecordList.size() - 1; i++){
+        List<ReportRecord> reportRecordList = reportRecordRepository.findReportRecordByStudentInfoAndHonorInfo(studentInfo, honorInfo);
+        for (int i = 0; i < reportRecordList.size() - 1; i++) {
             ReportRecordModel reportRecordModel = new ReportRecordModel(reportRecordList.get(i));
             reportRecordModelArrayList.add(reportRecordModel);
         }
         return reportRecordModelArrayList;
     }
 
-    @PostMapping("/api/manager_checker/add_reportRecord")
-    public String addReportRecord(@RequestBody HonorInfo honorInfo, HttpServletRequest request)
-    {
+    @PostMapping("/api/student/add_reportRecord")
+    public String addReportRecord(@RequestBody HonorInfoModel honorInfoModel, HttpServletRequest request) {
         HttpSession session = request.getSession();
         StudentInfo studentInfo = studentInfoRepository
-                .findStudentInfoByNumber((String) session.getAttribute("studentNumber"));
-        ReportRecord reportRecord = new ReportRecord(honorInfo,studentInfo);
-
+                .findStudentInfoByNumber((String) session.getAttribute("userName"));
+        HonorInfo honorInfo = new HonorInfo(honorInfoModel);
+        ReportRecord reportRecord = new ReportRecord(honorInfo, studentInfo);
         reportRecordRepository.save(reportRecord);
         return "{\"message\":\"add reportRecord success\"}";
     }
 
     @PostMapping("/api/manager_checker/update_reportRecord")
-    public String updateReportRecord(@RequestBody ReportRecordModel reportRecordModel)
-    {
+    public String updateReportRecord(@RequestBody ReportRecordModel reportRecordModel) {
         ReportRecord reportRecord1 = reportRecordRepository.findReportRecordById(reportRecordModel.getId());
-        if(reportRecord1 == null)
-        {
+        if (reportRecord1 == null) {
             return "{\"message\":\"reportRecord not find\"}";
-        }else {
+        } else {
             reportRecord1.setStatus(reportRecordModel.getStatus());
             reportRecordRepository.save(reportRecord1);
+        }
+        return "{\"message\":\"update reportRecord success\"}";
+    }
+
+    @PostMapping("/api/checker/check_reportRecord")
+    public String checkReportRecord(@RequestBody ReportRecordModel reportRecordModel
+            , HttpServletRequest request) {
+        ReportRecord reportRecord1 = reportRecordRepository.findReportRecordById(reportRecordModel.getId());
+        if (reportRecord1 == null) {
+            return "{\"message\":\"reportRecord not find\"}";
+        } else {
+            if (reportRecordModel.getStatus().equals("PASS")) {
+                HttpSession session = request.getSession();
+                CheckerInfo checkerInfo = checkerInfoRepository
+                        .findCheckerInfoByUsername((String) session.getAttribute("userName"));
+                if (checkerInfo.getAuthority() == CheckerInfo.Authority.FIRST_LEVEL) {
+                    reportRecord1.setStatus(ReportRecord.Status.FIRST_REVIEW);
+                } else if (checkerInfo.getAuthority() == CheckerInfo.Authority.SECOND_LEVEL) {
+                    reportRecord1.setStatus(ReportRecord.Status.ALREADY_REVIEW);
+                }
+                reportRecordRepository.save(reportRecord1);
+            }
         }
         return "{\"message\":\"update reportRecord success\"}";
     }

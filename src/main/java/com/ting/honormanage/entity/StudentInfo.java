@@ -42,6 +42,7 @@ public class StudentInfo {
     }
 
     public StudentInfo(StudentInfo studentInfo) {
+        this.id = studentInfo.id;
         this.number = studentInfo.number;
         this.password = studentInfo.password;
         this.name = studentInfo.name;

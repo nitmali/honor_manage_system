@@ -2,9 +2,11 @@ package com.ting.honormanage.controller;
 
 import com.ting.honormanage.entity.CheckerInfo;
 import com.ting.honormanage.entity.ManagerInfo;
+import com.ting.honormanage.entity.StudentInfo;
 import com.ting.honormanage.model.UserModel;
 import com.ting.honormanage.repository.CheckerInfoRepository;
 import com.ting.honormanage.repository.ManagerInfoRepository;
+import com.ting.honormanage.repository.StudentInfoRepository;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -23,6 +25,9 @@ public class LoginController {
 
     @Resource
     private CheckerInfoRepository checkerInfoRepository;
+
+    @Resource
+    private StudentInfoRepository studentInfoRepository;
 
     @PostMapping("/api/post_manager_login")
     public String managerLogin(@RequestBody UserModel userModel, HttpServletRequest request) {
@@ -55,4 +60,18 @@ public class LoginController {
         }
     }
 
+    @PostMapping("/api/post_student_login")
+    public String studentLogin(@RequestBody UserModel userModel, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        StudentInfo studentInfo = studentInfoRepository.findStudentInfoByNumber(userModel.getUserName());
+        if(studentInfo == null){
+            return "{\"message\":\"user not find\"}";
+        }else if (studentInfo.getPassword().equals(userModel.getPassword())){
+            session.setAttribute("userType", userModel.getUserType());
+            session.setAttribute("userName", userModel.getUserName());
+            return "{\"message\":\"login success\"}";
+        }else {
+            return "{\"message\":\"password error\"}";
+        }
+    }
 }

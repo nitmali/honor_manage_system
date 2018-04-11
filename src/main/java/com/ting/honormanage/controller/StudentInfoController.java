@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -20,6 +21,12 @@ import java.util.List;
 public class StudentInfoController {
     @Resource
     private StudentInfoRepository studentInfoRepository;
+
+    @GetMapping("/api/student/get_studentInfo_myself")
+    public StudentInfo getStudentMyself(HttpServletRequest request) {
+        return studentInfoRepository
+                .findStudentInfoByNumber((String) request.getSession().getAttribute("userName"));
+    }
 
     @GetMapping("/api/manager/get_studentInfo_all")
     public List<StudentInfo> getStudentInfoList() {

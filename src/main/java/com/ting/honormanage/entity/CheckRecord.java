@@ -1,6 +1,7 @@
 package com.ting.honormanage.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -25,6 +26,16 @@ public class CheckRecord {
 
     @Column(nullable = false)
     private Date checkTime;
+
+    public CheckRecord() {
+    }
+
+    public CheckRecord(ReportRecord reportRecord, CheckerInfo checkerInfo){
+        this.reportRecord = reportRecord;
+        this.checkerInfo = checkerInfo;
+        this.opinion = null;
+        this.checkTime = new Timestamp(System.currentTimeMillis());
+    }
 
     public Long getId() {
         return id;

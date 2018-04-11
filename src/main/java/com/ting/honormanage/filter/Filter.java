@@ -32,22 +32,24 @@ public class Filter implements javax.servlet.Filter {
         String webjars = "webjars";
         String css = "css";
         String js = "js";
+        String publicResources = "publicResources";
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         String userType = (String) request.getSession().getAttribute("userType");
         String uri = request.getRequestURI();
 
         if (userType != null) {
-            if(uri.contains(userType))
-            {
+            if (uri.contains(userType)) {
                 flag = false;
             }
         }
 
         if (uri.contains(login) || Objects.equals(uri, root) || uri.contains(webjars)
-                || uri.contains(css) || uri.contains(js) || uri.contains(logout)) {
+                || uri.contains(css) || uri.contains(js) || uri.contains(logout)
+                || uri.contains(publicResources)) {
             flag = false;
         }
+        flag = false;
         if (flag) {
             response.sendRedirect("/");
         } else {

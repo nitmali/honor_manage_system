@@ -1,6 +1,7 @@
 package com.ting.honormanage.controller;
 
 import com.ting.honormanage.entity.CheckerInfo;
+import com.ting.honormanage.model.ChangePasswordModel;
 import com.ting.honormanage.model.CheckerInfoModel;
 import com.ting.honormanage.repository.CheckerInfoRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,4 +115,17 @@ public class CheckerInfoController {
         return "{\"message\":\"delete checkerInfo success\"}";
     }
 
+    @PostMapping("/api/checker/change_checkerPassword")
+    public String changeCheckerPassword(@RequestBody ChangePasswordModel changePasswordModel, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        CheckerInfo checkerInfo = checkerInfoRepository
+                .findCheckerInfoByUsername((String) session.getAttribute("userName"));
+        if (changePasswordModel.getOldPassword().equals(checkerInfo.getPassword())) {
+            checkerInfo.setPassword(changePasswordModel.getNewPassword());
+            checkerInfoRepository.save(checkerInfo);
+            return "{\"message\":\"change password success\"}";
+        } else {
+            return "{\"message\":\"old password error\"}";
+        }
+    }
 }

@@ -749,7 +749,7 @@ Responsive.defaults = {
 					return '';
 				}
 
-				// Use a non-public DT API method to render the data for display
+				// Use a non-publicResources DT API method to render the data for display
 				// This needs to be updated when DT adds a suitable method for
 				// this type of data retrieval
 				var dtPrivate = api.settings()[0];
