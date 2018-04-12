@@ -52,7 +52,7 @@ public class CheckRecordModel {
     public CheckRecordModel() {
     }
 
-    public CheckRecordModel(CheckRecord checkRecord){
+    public CheckRecordModel(CheckRecord checkRecord) {
         this.id = checkRecord.getId();
         this.honorInfoName = checkRecord.getReportRecord().getHonorInfo().getName();
         this.honorInfoLevel = checkRecord.getReportRecord().getHonorInfo().levelOfHonorInfoModel();
@@ -73,6 +73,7 @@ public class CheckRecordModel {
         this.checkerInfoPhone = checkRecord.getCheckerInfo().getPhone();
         this.opinion = checkRecord.getOpinion();
         this.checkTime = checkRecord.getCheckTime();
+
     }
 
     public Long getId() {

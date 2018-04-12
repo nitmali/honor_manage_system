@@ -38,13 +38,39 @@ public class ReportRecordController {
     @Resource
     private CheckerInfoRepository checkerInfoRepository;
 
-    @GetMapping("/api/manager_checker/get_reportRecord_all")
+    @GetMapping("/api/checker_manager/get_reportRecord_all")
     public List<ReportRecordModel> getReportRecordList() {
         List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
         List<ReportRecord> reportRecordList = (List<ReportRecord>) reportRecordRepository.findAll();
-        for (int i = 0; i < reportRecordList.size() - 1; i++) {
-            ReportRecordModel reportRecordModel = new ReportRecordModel(reportRecordList.get(i));
+        for (ReportRecord aReportRecordList : reportRecordList) {
+            ReportRecordModel reportRecordModel = new ReportRecordModel(aReportRecordList);
             reportRecordModelArrayList.add(reportRecordModel);
+        }
+        return reportRecordModelArrayList;
+    }
+
+    @GetMapping("/api/checker/get_reportRecord_all_of_check")
+    public List<ReportRecordModel> getReportRecordOfcheckList(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        CheckerInfo checkerInfo = checkerInfoRepository
+                .findCheckerInfoByUsername((String) session.getAttribute("userName"));
+
+        System.err.println((String) session.getAttribute("userName"));
+        List<ReportRecord> reportRecordList;
+        if (checkerInfo.getAuthority() == CheckerInfo.Authority.FIRST_LEVEL) {
+            reportRecordList = reportRecordRepository
+                    .findReportRecordByStatus(ReportRecord.Status.WAITING_REVIEW);
+        } else {
+            reportRecordList = reportRecordRepository
+                    .findReportRecordByStatus(ReportRecord.Status.FIRST_REVIEW);
+        }
+        List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
+
+        for (ReportRecord aReportRecordList : reportRecordList) {
+            ReportRecordModel reportRecordModel = new ReportRecordModel(aReportRecordList);
+
+            reportRecordModelArrayList.add(reportRecordModel);
+
         }
         return reportRecordModelArrayList;
     }
@@ -58,8 +84,8 @@ public class ReportRecordController {
     public List<ReportRecordModel> getReportRecordListFromStatus(ReportRecord.Status status) {
         List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
         List<ReportRecord> reportRecordList = reportRecordRepository.findReportRecordByStatus(status);
-        for (int i = 0; i < reportRecordList.size() - 1; i++) {
-            ReportRecordModel reportRecordModel = new ReportRecordModel(reportRecordList.get(i));
+        for (ReportRecord aReportRecordList : reportRecordList) {
+            ReportRecordModel reportRecordModel = new ReportRecordModel(aReportRecordList);
             reportRecordModelArrayList.add(reportRecordModel);
         }
         return reportRecordModelArrayList;
@@ -70,8 +96,8 @@ public class ReportRecordController {
         StudentInfo studentInfo = studentInfoRepository.findStudentInfoById(studentId);
         List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
         List<ReportRecord> reportRecordList = reportRecordRepository.findReportRecordByStudentInfo(studentInfo);
-        for (int i = 0; i < reportRecordList.size() - 1; i++) {
-            ReportRecordModel reportRecordModel = new ReportRecordModel(reportRecordList.get(i));
+        for (ReportRecord aReportRecordList : reportRecordList) {
+            ReportRecordModel reportRecordModel = new ReportRecordModel(aReportRecordList);
             reportRecordModelArrayList.add(reportRecordModel);
         }
         return reportRecordModelArrayList;
@@ -83,8 +109,8 @@ public class ReportRecordController {
         HonorInfo honorInfo = honorInfoRepository.findHonorInfoById(honorId);
         List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
         List<ReportRecord> reportRecordList = reportRecordRepository.findReportRecordByHonorInfo(honorInfo);
-        for (int i = 0; i < reportRecordList.size() - 1; i++) {
-            ReportRecordModel reportRecordModel = new ReportRecordModel(reportRecordList.get(i));
+        for (ReportRecord aReportRecordList : reportRecordList) {
+            ReportRecordModel reportRecordModel = new ReportRecordModel(aReportRecordList);
             reportRecordModelArrayList.add(reportRecordModel);
         }
         return reportRecordModelArrayList;
@@ -95,9 +121,10 @@ public class ReportRecordController {
         StudentInfo studentInfo = studentInfoRepository.findStudentInfoById(studentId);
         HonorInfo honorInfo = honorInfoRepository.findHonorInfoById(honorId);
         List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
-        List<ReportRecord> reportRecordList = reportRecordRepository.findReportRecordByStudentInfoAndHonorInfo(studentInfo, honorInfo);
-        for (int i = 0; i < reportRecordList.size() - 1; i++) {
-            ReportRecordModel reportRecordModel = new ReportRecordModel(reportRecordList.get(i));
+        List<ReportRecord> reportRecordList = reportRecordRepository
+                .findReportRecordByStudentInfoAndHonorInfo(studentInfo, honorInfo);
+        for (ReportRecord aReportRecordList : reportRecordList) {
+            ReportRecordModel reportRecordModel = new ReportRecordModel(aReportRecordList);
             reportRecordModelArrayList.add(reportRecordModel);
         }
         return reportRecordModelArrayList;
@@ -143,7 +170,7 @@ public class ReportRecordController {
                     reportRecord1.setStatus(ReportRecord.Status.ALREADY_REVIEW);
                 }
 
-            }else if(reportRecordModel.getStatus().equals("NOT_PASS")){
+            } else if (reportRecordModel.getStatus().equals("NOT_PASS")) {
                 reportRecord1.setStatus(ReportRecord.Status.NOT_PASS);
             }
             reportRecordRepository.save(reportRecord1);

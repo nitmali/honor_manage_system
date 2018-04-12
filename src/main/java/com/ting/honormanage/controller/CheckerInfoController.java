@@ -38,8 +38,8 @@ public class CheckerInfoController {
     public List<CheckerInfoModel> getCheckerInfoList() {
         List<CheckerInfoModel> checkerInfoModelArrayList = new ArrayList<>();
         List<CheckerInfo> checkerInfoList = (List<CheckerInfo>) checkerInfoRepository.findAll();
-        for (int i = 0; i < checkerInfoList.size() - 1; i++) {
-            CheckerInfoModel checkerInfoModel = new CheckerInfoModel(checkerInfoList.get(i));
+        for (CheckerInfo aCheckerInfoList : checkerInfoList) {
+            CheckerInfoModel checkerInfoModel = new CheckerInfoModel(aCheckerInfoList);
             checkerInfoModelArrayList.add(checkerInfoModel);
         }
         return checkerInfoModelArrayList;
@@ -48,9 +48,9 @@ public class CheckerInfoController {
     @GetMapping("/api/manager/get_checkerInfo_name")
     public List<CheckerInfoModel> getCheckerInfoFromName(String name) {
         List<CheckerInfoModel> checkerInfoModelArrayList = new ArrayList<>();
-        List<CheckerInfo> checkerInfoList = (List<CheckerInfo>) checkerInfoRepository.findCheckerInfoByName(name);
-        for (int i = 0; i < checkerInfoList.size() - 1; i++) {
-            CheckerInfoModel checkerInfoModel = new CheckerInfoModel(checkerInfoList.get(i));
+        List<CheckerInfo> checkerInfoList = checkerInfoRepository.findCheckerInfoByName(name);
+        for (CheckerInfo aCheckerInfoList : checkerInfoList) {
+            CheckerInfoModel checkerInfoModel = new CheckerInfoModel(aCheckerInfoList);
             checkerInfoModelArrayList.add(checkerInfoModel);
         }
         return checkerInfoModelArrayList;
@@ -70,8 +70,8 @@ public class CheckerInfoController {
     public List<CheckerInfoModel> getCheckerInfoFromPhone(String phone) {
         List<CheckerInfoModel> checkerInfoModelArrayList = new ArrayList<>();
         List<CheckerInfo> checkerInfoList = checkerInfoRepository.findCheckerInfoByPhone(phone);
-        for (int i = 0; i < checkerInfoList.size() - 1; i++) {
-            CheckerInfoModel checkerInfoModel = new CheckerInfoModel(checkerInfoList.get(i));
+        for (CheckerInfo aCheckerInfoList : checkerInfoList) {
+            CheckerInfoModel checkerInfoModel = new CheckerInfoModel(aCheckerInfoList);
             checkerInfoModelArrayList.add(checkerInfoModel);
         }
         return checkerInfoModelArrayList;
@@ -80,9 +80,9 @@ public class CheckerInfoController {
     @GetMapping("/api/manager/get_checkerInfo_authority")
     public List<CheckerInfoModel> getCheckerInfoFromAuthority(String authority) {
         List<CheckerInfoModel> checkerInfoModelArrayList = new ArrayList<>();
-        List<CheckerInfo> checkerInfoList = (List<CheckerInfo>) checkerInfoRepository.findCheckerInfoByAuthority(authority);
-        for (int i = 0; i < checkerInfoList.size() - 1; i++) {
-            CheckerInfoModel checkerInfoModel = new CheckerInfoModel(checkerInfoList.get(i));
+        List<CheckerInfo> checkerInfoList = checkerInfoRepository.findCheckerInfoByAuthority(authority);
+        for (CheckerInfo aCheckerInfoList : checkerInfoList) {
+            CheckerInfoModel checkerInfoModel = new CheckerInfoModel(aCheckerInfoList);
             checkerInfoModelArrayList.add(checkerInfoModel);
         }
         return checkerInfoModelArrayList;

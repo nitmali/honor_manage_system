@@ -38,8 +38,8 @@ public class CheckRecordController {
     public List<CheckRecordModel> getCheckRecordModelList() {
         List<CheckRecordModel> checkRecordModelArrayList = new ArrayList<>();
         List<CheckRecord> checkRecordList = (List<CheckRecord>) checkRecordRepository.findAll();
-        for (int i = 0; i < checkRecordList.size() - 1; i++) {
-            CheckRecordModel checkRecordModel = new CheckRecordModel(checkRecordList.get(i));
+        for (CheckRecord aCheckRecordList : checkRecordList) {
+            CheckRecordModel checkRecordModel = new CheckRecordModel(aCheckRecordList);
             checkRecordModelArrayList.add(checkRecordModel);
         }
         return checkRecordModelArrayList;
@@ -55,8 +55,8 @@ public class CheckRecordController {
         ReportRecord reportRecord = reportRecordRepository.findReportRecordById(reportRecordId);
         List<CheckRecordModel> checkRecordModelArrayList = new ArrayList<>();
         List<CheckRecord> checkRecordList = checkRecordRepository.findCheckRecordByReportRecord(reportRecord);
-        for (int i = 0; i < checkRecordList.size() - 1; i++) {
-            CheckRecordModel checkRecordModel = new CheckRecordModel(checkRecordList.get(i));
+        for (CheckRecord aCheckRecordList : checkRecordList) {
+            CheckRecordModel checkRecordModel = new CheckRecordModel(aCheckRecordList);
             checkRecordModelArrayList.add(checkRecordModel);
         }
         return checkRecordModelArrayList;
@@ -67,8 +67,8 @@ public class CheckRecordController {
         CheckerInfo checkerInfo = checkerInfoRepository.findCheckerInfoById(checkerInfoId);
         List<CheckRecordModel> checkRecordModelArrayList = new ArrayList<>();
         List<CheckRecord> checkRecordList = checkRecordRepository.findCheckRecordByCheckerInfo(checkerInfo);
-        for (int i = 0; i < checkRecordList.size() - 1; i++) {
-            CheckRecordModel checkRecordModel = new CheckRecordModel(checkRecordList.get(i));
+        for (CheckRecord aCheckRecordList : checkRecordList) {
+            CheckRecordModel checkRecordModel = new CheckRecordModel(aCheckRecordList);
             checkRecordModelArrayList.add(checkRecordModel);
         }
         return checkRecordModelArrayList;
@@ -80,8 +80,8 @@ public class CheckRecordController {
         CheckerInfo checkerInfo = checkerInfoRepository.findCheckerInfoById(checkerInfoId);
         List<CheckRecordModel> checkRecordModelArrayList = new ArrayList<>();
         List<CheckRecord> checkRecordList = checkRecordRepository.findCheckRecordByReportRecordAndCheckerInfo(reportRecord, checkerInfo);
-        for (int i = 0; i < checkRecordList.size() - 1; i++) {
-            CheckRecordModel checkRecordModel = new CheckRecordModel(checkRecordList.get(i));
+        for (CheckRecord aCheckRecordList : checkRecordList) {
+            CheckRecordModel checkRecordModel = new CheckRecordModel(aCheckRecordList);
             checkRecordModelArrayList.add(checkRecordModel);
         }
         return checkRecordModelArrayList;

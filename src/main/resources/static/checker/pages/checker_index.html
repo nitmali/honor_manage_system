@@ -29,6 +29,7 @@
     <!-- Custom Fonts -->
     <link href="../../publicResources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link href="../customize/css/checker_index.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -120,7 +121,7 @@
                                 <!--<th>荣誉名次</th>-->
                                 <!--<th>获奖学年</th>-->
                                 <!--<th>附件</th>-->
-                                <th>申报时间</th>
+                                <th>审核状态</th>
                             </tr>
                             </thead>
                         </table>
@@ -136,7 +137,7 @@
     <!-- /#page-wrapper -->
 </div>
 
-<div class="modal fade" id="reportRecordModalApp">
+<div class="modal fade " id="reportRecordModalApp">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- 模态框头部 -->
@@ -150,111 +151,84 @@
             <!-- 模态框主体 -->
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-lg-10 col-lg-offset-1">
-                        <form class="national-day-plan-form">
-                            <div style="width: 100%;margin: auto;">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label for="studentInfoNumber">学号</label>
-                                                <input type="text" class="form-control" id="studentInfoNumber"
-                                                       v-model="reportRecord.studentInfoNumber" readonly>
-                                            </div>
+                    <div class="col-lg-10 col-lg-offset-1" id="checkInfo">
+                        <table style="width: 100%" id="studentInfo">
+                            <tr>
+                                <th>学生信息</th>
+                            </tr>
+                            <tr class="studentGray">
+                                <td>学号</td>
+                                <td>{{reportRecord.studentInfoNumber}}</td>
+                                <td>姓名</td>
+                                <td>{{reportRecord.studentInfoName}}</td>
+                            </tr>
+                            <tr>
+                                <td>性别</td>
+                                <td>{{reportRecord.studentInfoSex}}</td>
+                                <td>学院</td>
+                                <td>{{reportRecord.studentInfoCollege}}</td>
+                            </tr>
+                            <tr class="studentGray">
+                                <td>班级</td>
+                                <td>{{reportRecord.studentInfoClass}}</td>
+                                <td>年级</td>
+                                <td>{{reportRecord.studentInfoGrade}}</td>
+                            </tr>
+                            <tr>
+                                <td>专业</td>
+                                <td>{{reportRecord.studentInfoMajor}}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
 
-                                            <div class="form-group">
-                                                <label for="studentInfoName">姓名</label>
-                                                <input type="text" class="form-control" id="studentInfoName"
-                                                       v-model="reportRecord.studentInfoName" readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="studentInfoSex">性别</label>
-                                                <input type="text" class="form-control" id="studentInfoSex"
-                                                       v-model="reportRecord.studentInfoSex" readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="studentInfoCollege">学院</label>
-                                                <input type="text" class="form-control" id="studentInfoCollege"
-                                                       v-model="reportRecord.studentInfoCollege" readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="studentInfoGrade">年级</label>
-                                                <input type="text" class="form-control" id="studentInfoGrade"
-                                                       v-model="reportRecord.studentInfoGrade" readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="studentInfoMajor">专业</label>
-                                                <input type="text" class="form-control" id="studentInfoMajor"
-                                                       v-model="reportRecord.studentInfoMajor" readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="studentInfoClass">班级</label>
-                                                <input type="text" class="form-control" id="studentInfoClass"
-                                                       v-model="reportRecord.studentInfoClass" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label for="honorInfoLevel">荣誉级别</label>
-                                                <input type="text" class="form-control" id="honorInfoLevel"
-                                                       v-model="reportRecord.honorInfoLevel" readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="honorInfoKind">荣誉类别</label>
-                                                <input type="text" class="form-control" id="honorInfoKind"
-                                                       v-model="reportRecord.honorInfoKind" readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="honorInfoName">荣誉名称</label>
-                                                <input type="text" class="form-control" id="honorInfoName"
-                                                       v-model="reportRecord.honorInfoName" readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="honorInfoRank">荣誉名次</label>
-                                                <input type="text" class="form-control" id="honorInfoRank"
-                                                       v-model="reportRecord.honorInfoRank" readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="honorInFoYear">获奖学年</label>
-                                                <input type="text" class="form-control" id="honorInFoYear"
-                                                       v-model="reportRecord.honorInfoYear" readonly>
-                                            </div>
-
-
-                                            <div class="form-group">
-                                                <label for="annex">申报时间</label>
-                                                <input type="text" class="form-control" id="annex"
-                                                       v-model="reportRecord.annex" readonly>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="status">申报记录状态</label>
-                                                <input type="text" class="form-control" id="status"
-                                                       v-model="reportRecord.status" readonly>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </form>
+                        </table>
+                        <br/>
+                        <table style="width: 100%" id="honorInfo">
+                            <tr>
+                                <th>荣誉信息</th>
+                            </tr>
+                            <tr class="studentGray">
+                                <td>荣誉级别</td>
+                                <td>{{reportRecord.honorInfoLevel}}</td>
+                                <td>荣誉类别</td>
+                                <td>{{reportRecord.honorInfoKind}}</td>
+                            </tr>
+                            <tr>
+                                <td>荣誉名称</td>
+                                <td>{{reportRecord.honorInfoName}}</td>
+                                <td>荣誉名次</td>
+                                <td>{{reportRecord.honorInfoRank}}</td>
+                            </tr>
+                            <tr class="studentGray">
+                                <td>获奖学年</td>
+                                <td>{{reportRecord.honorInfoYear}}</td>
+                                <td>申报时间</td>
+                                <td>{{reportRecord.recordTime}}</td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table>
+                            <tr>
+                                <th colspan="2">附件</th>
+                                <th colspan="2">审核意见</th>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <img src="../../publicResources/nitLogo.png" style="height: 50%">
+                                </td>
+                                <td colspan="2">
+                                    <textarea   title="" style="width: 100%"></textarea>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
 
+
             <!-- 模态框底部 -->
             <div class="check modal-footer">
-                <a type="button" class="btn btn-success"  style="width: 100px"
+                <a type="button" class="btn btn-success" style="width: 100px"
                    v-on:click="check_reportRecord_PASS()">通过
                 </a>
                 &emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

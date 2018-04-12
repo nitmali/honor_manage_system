@@ -26,8 +26,8 @@ public class HonorInfoController {
     public List<HonorInfoModel> getHonorInfoModelList() {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findAll();
-        for (int i = 0; i < honorInfoList.size() - 1; i++){
-            HonorInfoModel honorInfoModel = new HonorInfoModel(honorInfoList.get(i));
+        for (HonorInfo aHonorInfoList : honorInfoList) {
+            HonorInfoModel honorInfoModel = new HonorInfoModel(aHonorInfoList);
             honorInfoModelArrayList.add(honorInfoModel);
         }
             return honorInfoModelArrayList;
@@ -43,9 +43,9 @@ public class HonorInfoController {
     @GetMapping("/api/manager/get_honorInfo_yearBetween")
     public List<HonorInfoModel> getHonorInfoFromYearBetween(Date year1, Date year2) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
-        List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findHonorInfoByYearBetween(year1, year2);
-        for (int i = 0; i < honorInfoList.size() - 1; i++){
-            HonorInfoModel honorInfoModel = new HonorInfoModel(honorInfoList.get(i));
+        List<HonorInfo> honorInfoList = honorInfoRepository.findHonorInfoByYearBetween(year1, year2);
+        for (HonorInfo aHonorInfoList : honorInfoList) {
+            HonorInfoModel honorInfoModel = new HonorInfoModel(aHonorInfoList);
             honorInfoModelArrayList.add(honorInfoModel);
         }
         return honorInfoModelArrayList;
@@ -59,9 +59,9 @@ public class HonorInfoController {
     @GetMapping("/api/manager/get_honorInfo_name")
     public List<HonorInfoModel> getHonorInfoFromName(String name) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
-        List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findHonorInfoByName(name);
-        for (int i = 0; i < honorInfoList.size() - 1; i++){
-            HonorInfoModel honorInfoModel = new HonorInfoModel(honorInfoList.get(i));
+        List<HonorInfo> honorInfoList = honorInfoRepository.findHonorInfoByName(name);
+        for (HonorInfo aHonorInfoList : honorInfoList) {
+            HonorInfoModel honorInfoModel = new HonorInfoModel(aHonorInfoList);
             honorInfoModelArrayList.add(honorInfoModel);
         }
         return honorInfoModelArrayList;
@@ -70,9 +70,9 @@ public class HonorInfoController {
     @GetMapping("/api/manager/get_honorInfo_kind")
     public List<HonorInfoModel> getHonorInfoFromKind(HonorInfo.Kind kind) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
-        List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findHonorInfoByKind(kind);
-        for (int i = 0; i < honorInfoList.size() - 1; i++){
-            HonorInfoModel honorInfoModel = new HonorInfoModel(honorInfoList.get(i));
+        List<HonorInfo> honorInfoList = honorInfoRepository.findHonorInfoByKind(kind);
+        for (HonorInfo aHonorInfoList : honorInfoList) {
+            HonorInfoModel honorInfoModel = new HonorInfoModel(aHonorInfoList);
             honorInfoModelArrayList.add(honorInfoModel);
         }
         return honorInfoModelArrayList;
@@ -81,9 +81,9 @@ public class HonorInfoController {
     @GetMapping("/api/manager/get_honorInfo_status")
     public List<HonorInfoModel> getHonorInfoFromStatus(HonorInfo.Status status) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
-        List<HonorInfo> honorInfoList = (List<HonorInfo>) honorInfoRepository.findHonorInfoByStatus(status);
-        for (int i = 0; i < honorInfoList.size() - 1; i++){
-            HonorInfoModel honorInfoModel = new HonorInfoModel(honorInfoList.get(i));
+        List<HonorInfo> honorInfoList = honorInfoRepository.findHonorInfoByStatus(status);
+        for (HonorInfo aHonorInfoList : honorInfoList) {
+            HonorInfoModel honorInfoModel = new HonorInfoModel(aHonorInfoList);
             honorInfoModelArrayList.add(honorInfoModel);
         }
         return honorInfoModelArrayList;

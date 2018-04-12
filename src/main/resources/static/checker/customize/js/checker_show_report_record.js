@@ -30,7 +30,8 @@ var reportRecordModalApp = new Vue({
                 dataType: "json",
                 success: function (data) {
                     if (data.message === "check reportRecord success") {
-                        alert("审核成功");
+                        alert("审核" +
+                            "成功");
                         location.reload();
                     }
                 },
@@ -80,7 +81,7 @@ function getDataTable() {
             processing: true,
             aLengthMenu: [5, 10, 25, 50], //更改显示记录数选项
             ajax: {
-                url: "/api/manager_checker/get_reportRecord_all",
+                url: "/api/checker/get_reportRecord_all_of_check",
                 type: 'GET',
                 dataSrc: ""
             },

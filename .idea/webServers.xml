@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="b80a5b2a-a5e9-4ec0-85c5-91332c219249" name="m" url="http://nitmali.com">
-        <fileTransfer host="nitmali.com" port="22" rootFolder="/home/m" accessType="SFTP">
+        <fileTransfer host="nitmali.com" port="22" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

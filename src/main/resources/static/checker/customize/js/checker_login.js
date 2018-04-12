@@ -6,6 +6,8 @@ var checkerLoginApp = new Vue({
     methods: {
         checker_login: function () {
             if (this.userModel.userName !== undefined && this.userModel.password !== undefined) {
+                checkerLoginApp.userModel.password = md5(md5(checkerLoginApp.userModel.password) + '8');
+                checkerLoginApp.userModel.password = md5(md5(checkerLoginApp.userModel.password) + '8');
                 this.userModel.userType = "checker";
                 $.ajax({
                     url: '/api/post_checker_login',

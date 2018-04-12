@@ -1,0 +1,16 @@
+#checkInfo table{
+    font-size:15px;
+    border-collapse: collapse;
+}
+
+#checkInfo table td{
+    width: 25%;
+}
+
+#checkInfo table tr td{
+    padding: 8px;
+}
+
+.studentGray{
+    background: #f9f9f9;
+}
