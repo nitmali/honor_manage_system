@@ -54,8 +54,6 @@ public class ReportRecordController {
         HttpSession session = request.getSession();
         CheckerInfo checkerInfo = checkerInfoRepository
                 .findCheckerInfoByUsername((String) session.getAttribute("userName"));
-
-        System.err.println((String) session.getAttribute("userName"));
         List<ReportRecord> reportRecordList;
         if (checkerInfo.getAuthority() == CheckerInfo.Authority.FIRST_LEVEL) {
             reportRecordList = reportRecordRepository
