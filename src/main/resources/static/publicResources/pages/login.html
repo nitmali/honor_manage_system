@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../publicResources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../../publicResources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../publicResources/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../../publicResources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <link href="../../publicResources/customize/css/login.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-lg-offset-4" id="login_right">
+
+            <div class="login-top" style="text-align: center">
+                <h3 style="text-align: center">欢迎使用荣誉管理系统</h3>
+            </div>
+            <div class="login-panel panel panel-default" id="userLoginApp">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please Sign In</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                        <fieldset>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Username" type="text" autofocus
+                                       v-model="userModel.userName">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Password" name="password" type="password"
+                                       value=""
+                                       v-model="userModel.password">
+                            </div>
+                            <div class="login-user">
+                                <ul >
+                                    <li>
+                                        <input type="radio" name="userType" value="student" checked="checked"
+                                               v-model="userModel.userType">学生
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="userType" value="checker"
+                                               v-model="userModel.userType">审核员
+                                    </li>
+                                    <li>
+                                        <input type="radio" name="userType" value="manager"
+                                               v-model="userModel.userType">管理员
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <a class="btn btn-lg btn-success btn-block" v-on:click="checker_login">登陆</a>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+
+<script src="../customize/js/md5/md5.js"></script>
+<script src="../customize/js/vueJs/vue.js"></script>
+
+<script src="../customize/js/login.js"></script>
+
+
+</body>
+
+</html>
