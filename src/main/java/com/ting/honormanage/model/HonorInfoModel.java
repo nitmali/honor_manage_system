@@ -3,7 +3,7 @@ package com.ting.honormanage.model;
 import com.ting.honormanage.entity.HonorInfo;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * @author nitmali@126.com

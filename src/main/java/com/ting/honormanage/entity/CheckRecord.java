@@ -2,7 +2,6 @@ package com.ting.honormanage.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * @author nitmali@126.com
@@ -25,7 +24,7 @@ public class CheckRecord {
     private String opinion;
 
     @Column(nullable = false)
-    private Date checkTime;
+    private Timestamp checkTime;
 
     public CheckRecord() {
     }
@@ -68,11 +67,11 @@ public class CheckRecord {
         this.opinion = opinion;
     }
 
-    public Date getCheckTime() {
+    public Timestamp getCheckTime() {
         return checkTime;
     }
 
-    public void setCheckTime(Date checkTime) {
+    public void setCheckTime(Timestamp checkTime) {
         this.checkTime = checkTime;
     }
 }

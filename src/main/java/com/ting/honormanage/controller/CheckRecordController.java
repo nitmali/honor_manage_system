@@ -102,4 +102,32 @@ public class CheckRecordController {
         checkRecordRepository.save(checkRecord);
         return "{\"message\":\"add checkRecord success\"}";
     }
+
+    @PostMapping("/api/checker/check_reportRecord")
+    public String checkReportRecord(@RequestBody ReportRecordModel reportRecordModel
+            , HttpServletRequest request) {
+        ReportRecord reportRecord1 = reportRecordRepository.findReportRecordById(reportRecordModel.getId());
+        if (reportRecord1 == null) {
+            return "{\"message\":\"reportRecord not find\"}";
+        } else {
+            HttpSession session = request.getSession();
+            CheckerInfo checkerInfo = checkerInfoRepository
+                    .findCheckerInfoByUsername((String) session.getAttribute("userName"));
+            if (reportRecordModel.getStatus().equals("PASS")) {
+                if (checkerInfo.getAuthority() == CheckerInfo.Authority.FIRST_LEVEL) {
+                    reportRecord1.setStatus(ReportRecord.Status.FIRST_REVIEW);
+                } else if (checkerInfo.getAuthority() == CheckerInfo.Authority.SECOND_LEVEL) {
+                    reportRecord1.setStatus(ReportRecord.Status.ALREADY_REVIEW);
+                }
+
+            } else if (reportRecordModel.getStatus().equals("NOT_PASS")) {
+                reportRecord1.setStatus(ReportRecord.Status.NOT_PASS);
+            }
+            CheckRecord checkRecord = new CheckRecord(reportRecord1, checkerInfo);
+            checkRecord.setOpinion(reportRecordModel.getOpinion());
+            reportRecordRepository.save(reportRecord1);
+            checkRecordRepository.save(checkRecord);
+            return "{\"message\":\"check reportRecord success\"}";
+        }
+    }
 }

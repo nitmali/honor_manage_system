@@ -2,7 +2,6 @@ package com.ting.honormanage.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
  * @author nitmali@126.com
@@ -20,8 +19,7 @@ public class ReportRecord {
     @ManyToOne
     private StudentInfo studentInfo;
 
-    private Date recordTime;
-
+    private Timestamp recordTime;
     //附件
     @Column
     private String annex;
@@ -79,11 +77,11 @@ public class ReportRecord {
         this.studentInfo = studentInfo;
     }
 
-    public Date getRecordTime() {
+    public Timestamp getRecordTime() {
         return recordTime;
     }
 
-    public void setRecordTime(Date recordTime) {
+    public void setRecordTime(Timestamp recordTime) {
         this.recordTime = recordTime;
     }
 

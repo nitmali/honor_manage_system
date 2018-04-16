@@ -1,11 +1,11 @@
 package com.ting.honormanage.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ting.honormanage.entity.CheckRecord;
-import com.ting.honormanage.entity.CheckerInfo;
-import com.ting.honormanage.entity.ReportRecord;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.sql.Timestamp;
+import java.sql.Date;
 
 @Component
 public class CheckRecordModel {
@@ -35,7 +35,7 @@ public class CheckRecordModel {
 
     private String studentInfoClass;
 
-    private Date reportRecordRecordTime;
+    private Timestamp reportRecordRecordTime;
 
     private String reportRecordAnnex;
 
@@ -47,7 +47,7 @@ public class CheckRecordModel {
 
     private String opinion;
 
-    private Date checkTime;
+    private Timestamp checkTime;
 
     public CheckRecordModel() {
     }
@@ -73,7 +73,6 @@ public class CheckRecordModel {
         this.checkerInfoPhone = checkRecord.getCheckerInfo().getPhone();
         this.opinion = checkRecord.getOpinion();
         this.checkTime = checkRecord.getCheckTime();
-
     }
 
     public Long getId() {
@@ -180,11 +179,11 @@ public class CheckRecordModel {
         this.studentInfoClass = studentInfoClass;
     }
 
-    public Date getReportRecordRecordTime() {
+    public Timestamp getReportRecordRecordTime() {
         return reportRecordRecordTime;
     }
 
-    public void setReportRecordRecordTime(Date reportRecordRecordTime) {
+    public void setReportRecordRecordTime(Timestamp reportRecordRecordTime) {
         this.reportRecordRecordTime = reportRecordRecordTime;
     }
 
@@ -228,11 +227,12 @@ public class CheckRecordModel {
         this.opinion = opinion;
     }
 
-    public Date getCheckTime() {
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    public Timestamp getCheckTime() {
         return checkTime;
     }
 
-    public void setCheckTime(Date checkTime) {
+    public void setCheckTime(Timestamp checkTime) {
         this.checkTime = checkTime;
     }
 }

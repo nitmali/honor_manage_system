@@ -1,9 +1,9 @@
 package com.ting.honormanage.model;
 
-import com.ting.honormanage.entity.HonorInfo;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ting.honormanage.entity.ReportRecord;
-import com.ting.honormanage.entity.StudentInfo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class ReportRecordModel {
@@ -34,7 +34,7 @@ public class ReportRecordModel {
 
     private String studentInfoClass;
 
-    private Date recordTime;
+    private Timestamp recordTime;
 
     private String opinion;
 
@@ -168,11 +168,12 @@ public class ReportRecordModel {
         this.studentInfoClass = studentInfoClass;
     }
 
-    public Date getRecordTime() {
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    public Timestamp getRecordTime() {
         return recordTime;
     }
 
-    public void setRecordTime(Date recordTime) {
+    public void setRecordTime(Timestamp recordTime) {
         this.recordTime = recordTime;
     }
 
