@@ -1,22 +1,32 @@
-var managerLoginApp = new Vue({
-    el: '#managerLoginApp',
+var userLoginApp = new Vue({
+    el: '#userLoginApp',
     data: {
         userModel: {}
     },
+    created: function () {
+        this.userModel.userType = "student";
+    },
     methods: {
-        manager_login: function () {
+        checker_login: function () {
             if (this.userModel.userName !== undefined && this.userModel.password !== undefined) {
-                this.userModel.userType = "manager";
+                if (this.userModel.userType !== "manager") {
+                    userLoginApp.userModel.password = md5(md5(userLoginApp.userModel.password) + '8');
+                    userLoginApp.userModel.password = md5(md5(userLoginApp.userModel.password) + '8');
+                }
+                var api = "/api/post_" + this.userModel.userType + "_login";
                 $.ajax({
-                    url: '/api/post_manager_login',
+                    url: api,
                     type: 'POST',
-                    data: JSON.stringify(managerLoginApp.userModel, null, 4),
+                    data: JSON.stringify(userLoginApp.userModel, null, 4),
                     contentType: "application/json",
                     dataType: "json",
                     success: function (data) {
+                        var url = "../../"+ userLoginApp.userModel.userType
+                            +"/pages/"+ userLoginApp.userModel.userType +"_index.html";
                         if (data.message === "login success") {
-                            managerLoginApp.go_to_url("manager_index.html");
+                            userLoginApp.go_to_url(url);
                         } else {
+                            userLoginApp.userModel.password = '';
                             alert("账号或者密码错误");
                         }
                     },
