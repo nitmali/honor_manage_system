@@ -1,15 +1,9 @@
 package com.ting.honormanage.controller;
 
-import com.ting.honormanage.entity.CheckerInfo;
-import com.ting.honormanage.entity.HonorInfo;
-import com.ting.honormanage.entity.ReportRecord;
-import com.ting.honormanage.entity.StudentInfo;
+import com.ting.honormanage.entity.*;
 import com.ting.honormanage.model.HonorInfoModel;
 import com.ting.honormanage.model.ReportRecordModel;
-import com.ting.honormanage.repository.CheckerInfoRepository;
-import com.ting.honormanage.repository.HonorInfoRepository;
-import com.ting.honormanage.repository.ReportRecordRepository;
-import com.ting.honormanage.repository.StudentInfoRepository;
+import com.ting.honormanage.repository.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,6 +31,9 @@ public class ReportRecordController {
 
     @Resource
     private CheckerInfoRepository checkerInfoRepository;
+
+    @Resource
+    private CheckRecordRepository checkRecordRepository;
 
     @GetMapping("/api/checker_manager/get_reportRecord_all")
     public List<ReportRecordModel> getReportRecordList() {
@@ -158,10 +155,10 @@ public class ReportRecordController {
         if (reportRecord1 == null) {
             return "{\"message\":\"reportRecord not find\"}";
         } else {
+            HttpSession session = request.getSession();
+            CheckerInfo checkerInfo = checkerInfoRepository
+                    .findCheckerInfoByUsername((String) session.getAttribute("userName"));
             if (reportRecordModel.getStatus().equals("PASS")) {
-                HttpSession session = request.getSession();
-                CheckerInfo checkerInfo = checkerInfoRepository
-                        .findCheckerInfoByUsername((String) session.getAttribute("userName"));
                 if (checkerInfo.getAuthority() == CheckerInfo.Authority.FIRST_LEVEL) {
                     reportRecord1.setStatus(ReportRecord.Status.FIRST_REVIEW);
                 } else if (checkerInfo.getAuthority() == CheckerInfo.Authority.SECOND_LEVEL) {
@@ -171,7 +168,10 @@ public class ReportRecordController {
             } else if (reportRecordModel.getStatus().equals("NOT_PASS")) {
                 reportRecord1.setStatus(ReportRecord.Status.NOT_PASS);
             }
+            CheckRecord checkRecord = new CheckRecord(reportRecord1,checkerInfo);
+            checkRecord.setOpinion(reportRecordModel.getOpinion());
             reportRecordRepository.save(reportRecord1);
+            checkRecordRepository.save(checkRecord);
             return "{\"message\":\"check reportRecord success\"}";
         }
     }

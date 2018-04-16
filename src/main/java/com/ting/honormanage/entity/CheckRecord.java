@@ -33,7 +33,6 @@ public class CheckRecord {
     public CheckRecord(ReportRecord reportRecord, CheckerInfo checkerInfo){
         this.reportRecord = reportRecord;
         this.checkerInfo = checkerInfo;
-        this.opinion = null;
         this.checkTime = new Timestamp(System.currentTimeMillis());
     }
 

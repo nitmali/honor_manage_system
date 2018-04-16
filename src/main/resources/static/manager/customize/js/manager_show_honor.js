@@ -33,7 +33,8 @@ var honorModalApp = new Vue({
                     }
                 },
                 error: function (XMLResponse) {
-                    alert(XMLResponse.responseText);
+                    // alert(XMLResponse.responseText);
+                    alert("无法删除！")
                 }
             });
         }

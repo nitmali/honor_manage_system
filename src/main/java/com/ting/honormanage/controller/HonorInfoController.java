@@ -103,4 +103,17 @@ public class HonorInfoController {
         }
     }
 
+    @PostMapping("/api/manager/delete_honorInfo")
+    public String deleteHonorInfo(@RequestBody HonorInfoModel honorInfoModel) {
+        HonorInfo honorInfo1 = honorInfoRepository.findHonorInfoById(honorInfoModel.getId());
+        {
+            if (honorInfo1 == null) {
+                return "{\"message\":\"not find honorInfo\"}";
+            } else {
+                honorInfoRepository.delete(honorInfo1);
+            }
+            return "{\"message\":\"delete honorInfo success\"}";
+        }
+    }
+
 }

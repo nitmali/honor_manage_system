@@ -36,6 +36,8 @@ public class ReportRecordModel {
 
     private Date recordTime;
 
+    private String opinion;
+
     private String annex;
 
     private String status;
@@ -172,6 +174,14 @@ public class ReportRecordModel {
 
     public void setRecordTime(Date recordTime) {
         this.recordTime = recordTime;
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
     }
 
     public String getAnnex() {
