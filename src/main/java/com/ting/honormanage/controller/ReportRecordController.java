@@ -4,16 +4,15 @@ import com.ting.honormanage.entity.*;
 import com.ting.honormanage.model.HonorInfoModel;
 import com.ting.honormanage.model.ReportRecordModel;
 import com.ting.honormanage.repository.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author nitmali
@@ -146,6 +145,19 @@ public class ReportRecordController {
             reportRecordRepository.save(reportRecord1);
         }
         return "{\"message\":\"update reportRecord success\"}";
+    }
+
+    @GetMapping("/api/manager/count_reportRecord")
+    @ResponseBody
+    public Map<String, Long> countReportRecord() {
+        Map<String, Long> map = new HashMap<>();
+        map.put("WAITING_REVIEW", reportRecordRepository
+                .countReportRecordByStatus(ReportRecord.Status.WAITING_REVIEW));
+        map.put("FIRST_REVIEW", reportRecordRepository
+                .countReportRecordByStatus(ReportRecord.Status.FIRST_REVIEW));
+        map.put("ALREADY_REVIEW", reportRecordRepository
+                .countReportRecordByStatus(ReportRecord.Status.ALREADY_REVIEW));
+        return map;
     }
 
 }

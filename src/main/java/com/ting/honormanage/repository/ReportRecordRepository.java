@@ -26,4 +26,6 @@ public interface ReportRecordRepository extends CrudRepository<ReportRecord,Long
 
     List<ReportRecord> findReportRecordByStudentInfoAndHonorInfo(StudentInfo studentInfo,HonorInfo honorInfo);
 
+    Long countReportRecordByStatus(ReportRecord.Status status);
+
 }
