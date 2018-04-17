@@ -161,7 +161,7 @@ public class ReportRecordController {
     }
 
     @GetMapping("/api/manager/count_reportRecord_Kind_level")
-    public List<Map<String,Long>> countReportRecordFrom(){
+    public List<Map<String,Long>> countReportRecordFromKindAndLevel(){
 
         List<Map<String,Long>> mapList = new ArrayList<>();
         Map<String,Long> map1 = new HashMap<>();
