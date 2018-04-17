@@ -59,6 +59,16 @@ var honorModalApp = new Vue({
         },
         close_model: function () {
             $('#honorModalApp').modal('hide');
+        },
+        button_confirm:function (fun) {
+            if (confirm("是否确认您的操作") === true) {
+                if(fun === "update_honorInfo"){
+                    this.update_honorInfo();
+                }
+                if(fun === "delete_honorInfo"){
+                    this.delete_honorInfo();
+                }
+            }
         }
     }
 });

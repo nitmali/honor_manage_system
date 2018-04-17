@@ -30,8 +30,7 @@ var reportRecordModalApp = new Vue({
                 dataType: "json",
                 success: function (data) {
                     if (data.message === "check reportRecord success") {
-                        alert("审核" +
-                            "成功");
+                        alert("审核成功");
                         location.reload();
                     }
                 },
@@ -40,14 +39,13 @@ var reportRecordModalApp = new Vue({
                 }
             });
         },
-        check_reportRecord_PASS:function () {
-            reportRecordModalApp.check_reportRecord("PASS");
-        },
-        check_reportRecord_NOT_PASS:function () {
-            reportRecordModalApp.check_reportRecord("NOT_PASS");
-        },
         close_model: function () {
             $('#reportRecordModalApp').modal('hide');
+        },
+        button_confirm:function (status) {
+            if (confirm("是否确认您的操作") === true) {
+                this.check_reportRecord(status);
+            }
         }
     }
 });

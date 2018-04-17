@@ -87,6 +87,16 @@ var checkerModalApp = new Vue({
         },
         close_model: function () {
             $('#checkerModalApp').modal('hide');
+        },
+        button_confirm:function (fun) {
+            if (confirm("是否确认您的操作") === true) {
+                if(fun === "update_checkerInfo"){
+                    this.update_checkerInfo();
+                }
+                if(fun === "delete_checkerInfo"){
+                    this.delete_checkerInfo();
+                }
+            }
         }
 
     }
