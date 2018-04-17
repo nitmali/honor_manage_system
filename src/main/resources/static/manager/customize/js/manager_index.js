@@ -1,10 +1,9 @@
 $().ready(function () {
     $.ajax({
-        url: "/api/manager/count_reportRecord",
+        url: "/api/manager/count_reportRecord_status",
         type: "get",
         dataType: "json",
-        data: {
-        },
+        data: {},
         success: function (data) {
             Morris.Donut({
                 element: 'morris-donut-chart',
@@ -26,54 +25,50 @@ $().ready(function () {
         }
     });
 
-    // $.get('/countCarLogs', function (data) {
-    //     Morris.Bar({
-    //         element: 'morris-bar-chart',
-    //         data: data,
-    //         xkey: 'licensePlate',
-    //         ykeys: ['count'],
-    //         labels: ['数量'],
-    //         resize: true
-    //     });
-    // });
+    $.get('/api/manager/count_reportRecord_Kind_level',
+        function (data) {
+            Morris.Bar({
+                element: 'morris-bar-chart',
+                data: [{
+                    y: '国家级',
+                    a: data[0].ACADEMIC_RESEARCH,
+                    b: data[0].DISCIPLINE_COMPETITION,
+                    c: data[0].INNOVATION_ENTREPRENEURSHIP,
+                    d: data[0].EXAMINATIONS
+                }, {
+                    y: '省级',
+                    a: data[1].ACADEMIC_RESEARCH,
+                    b: data[1].DISCIPLINE_COMPETITION,
+                    c: data[1].INNOVATION_ENTREPRENEURSHIP,
+                    d: data[1].EXAMINATIONS
+                }, {
+                    y: '市级',
+                    a: data[2].ACADEMIC_RESEARCH,
+                    b: data[2].DISCIPLINE_COMPETITION,
+                    c: data[2].INNOVATION_ENTREPRENEURSHIP,
+                    d: data[2].EXAMINATIONS
+                }, {
+                    y: '校级',
+                    a: data[3].ACADEMIC_RESEARCH,
+                    b: data[3].DISCIPLINE_COMPETITION,
+                    c: data[3].INNOVATION_ENTREPRENEURSHIP,
+                    d: data[3].EXAMINATIONS
+                }, {
+                    y: '院级',
+                    a: data[4].ACADEMIC_RESEARCH,
+                    b: data[4].DISCIPLINE_COMPETITION,
+                    c: data[4].INNOVATION_ENTREPRENEURSHIP,
+                    d: data[4].EXAMINATIONS
+                }],
+                xkey: 'y',
+                ykeys: ['a', 'b', 'c', 'd'],
+                labels: ['学术研究', '学科竞赛', '创新创业', '考级考证'],
+                hideHover: 'auto',
+                resize: true
+            });
+        });
 
-    Morris.Bar({
-        element: 'morris-bar-chart',
-        data: [{
-            y: '2006',
-            a: 100,
-            b: 90
-        }, {
-            y: '2007',
-            a: 75,
-            b: 65
-        }, {
-            y: '2008',
-            a: 50,
-            b: 40
-        }, {
-            y: '2009',
-            a: 75,
-            b: 65
-        }, {
-            y: '2010',
-            a: 50,
-            b: 40
-        }, {
-            y: '2011',
-            a: 75,
-            b: 65
-        }, {
-            y: '2012',
-            a: 100,
-            b: 90
-        }],
-        xkey: 'y',
-        ykeys: ['a', 'b'],
-        labels: ['Series A', 'Series B'],
-        hideHover: 'auto',
-        resize: true
-    });
+
 
 
 });
