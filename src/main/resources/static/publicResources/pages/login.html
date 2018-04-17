@@ -40,30 +40,31 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-lg-offset-4" id="login_right">
+        <div class="col-md-4 col-lg-offset-4 col-sm-6 col-sm-offset-3
+            col-lg-4 col-lg-offset-4" id="login_right">
 
-            <div class="login-top" style="text-align: center">
-                <h3 style="text-align: center">欢迎使用荣誉管理系统</h3>
-            </div>
+
             <div class="login-panel panel panel-default" id="userLoginApp">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title">Please Sign In</h3>
+                    <div class="login-top" style="text-align: center">
+                        <h3 style="text-align: center">高校学生荣誉管理平台</h3>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <form role="form">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Username" type="text" autofocus
+                                <input class="form-control" placeholder="用户名" type="text" autofocus
                                        v-model="userModel.userName">
                             </div>
                             <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password"
+                                <input class="form-control" placeholder="密码" name="password" type="password"
                                        value=""
                                        v-model="userModel.password">
                             </div>
                             <div class="login-user">
-                                <ul >
+                                <ul>
                                     <li>
                                         <input type="radio" name="userType" value="student" checked="checked"
                                                v-model="userModel.userType">学生
