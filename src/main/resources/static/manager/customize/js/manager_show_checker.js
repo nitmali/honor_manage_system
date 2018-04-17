@@ -84,6 +84,9 @@ var checkerModalApp = new Vue({
             } else {
                 return true;
             }
+        },
+        close_model: function () {
+            $('#checkerModalApp').modal('hide');
         }
 
     }

@@ -56,6 +56,9 @@ var honorModalApp = new Vue({
                     alert(XMLResponse.responseText);
                 }
             });
+        },
+        close_model: function () {
+            $('#honorModalApp').modal('hide');
         }
     }
 });

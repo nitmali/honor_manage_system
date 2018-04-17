@@ -2,11 +2,23 @@ var changeCheckerPasswordApp = new Vue({
     el: "#changeCheckerPasswordApp",
     data: {
         changePassword: {},
-        newPasswordAgain:''
+        newPasswordAgain: ''
     },
     methods: {
         change_password: function () {
             if (this.verification_password) {
+                changeCheckerPasswordApp.changePassword.newPassword
+                    = md5(md5(changeCheckerPasswordApp.changePassword.newPassword) + '8');
+                changeCheckerPasswordApp.changePassword.newPassword
+                    = md5(md5(changeCheckerPasswordApp.changePassword.newPassword) + '8');
+
+
+                changeCheckerPasswordApp.changePassword.oldPassword
+                    = md5(md5(changeCheckerPasswordApp.changePassword.oldPassword) + '8');
+                changeCheckerPasswordApp.changePassword.oldPassword
+                    = md5(md5(changeCheckerPasswordApp.changePassword.oldPassword) + '8');
+
+
                 $.ajax({
                     url: '/api/checker/change_checkerPassword',
                     type: 'POST',
@@ -15,9 +27,10 @@ var changeCheckerPasswordApp = new Vue({
                     dataType: "json",
                     success: function (data) {
                         if (data.message === "change password success") {
-                            alert("修改成功");
                             changeCheckerPasswordApp.reset_data();
-                        }else if(data.message === "old password error"){
+                            alert("修改成功");
+                        } else if (data.message === "old password error") {
+                            changeCheckerPasswordApp.reset_data();
                             alert("原密码错误");
                         }
                     },
@@ -32,7 +45,7 @@ var changeCheckerPasswordApp = new Vue({
                 return true;
             }
         },
-        reset_data:function () {
+        reset_data: function () {
             changeCheckerPasswordApp.changePassword = {};
             changeCheckerPasswordApp.newPasswordAgain = '';
         }

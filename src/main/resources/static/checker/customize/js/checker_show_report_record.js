@@ -45,6 +45,9 @@ var reportRecordModalApp = new Vue({
         },
         check_reportRecord_NOT_PASS:function () {
             reportRecordModalApp.check_reportRecord("NOT_PASS");
+        },
+        close_model: function () {
+            $('#reportRecordModalApp').modal('hide');
         }
     }
 });
