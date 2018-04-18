@@ -14,7 +14,7 @@ $().ready(function () {
                     label: "审核中",
                     value: data.FIRST_REVIEW
                 }, {
-                    label: "已审核",
+                    label: "通过审核",
                     value: data.ALREADY_REVIEW
                 }],
                 resize: true
