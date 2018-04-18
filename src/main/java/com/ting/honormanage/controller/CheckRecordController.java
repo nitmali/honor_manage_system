@@ -92,17 +92,6 @@ public class CheckRecordController {
         return new CheckRecordModel(checkRecordRepository.findCheckRecordByCheckTime(checkTime));
     }
 
-    @PostMapping("/api/manager_checker/add_checkRecord")
-    public String addCheckRecord(@RequestBody ReportRecordModel reportRecordModel, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        CheckerInfo checkerInfo = checkerInfoRepository
-                .findCheckerInfoByUsername((String) session.getAttribute("userName"));
-        ReportRecord reportRecord = reportRecordRepository.findReportRecordById(reportRecordModel.getId());
-        CheckRecord checkRecord = new CheckRecord(reportRecord, checkerInfo);
-        checkRecordRepository.save(checkRecord);
-        return "{\"message\":\"add checkRecord success\"}";
-    }
-
     @PostMapping("/api/checker/check_reportRecord")
     public String checkReportRecord(@RequestBody ReportRecordModel reportRecordModel
             , HttpServletRequest request) {
@@ -123,7 +112,8 @@ public class CheckRecordController {
             } else if (reportRecordModel.getStatus().equals("NOT_PASS")) {
                 reportRecord1.setStatus(ReportRecord.Status.NOT_PASS);
             }
-            CheckRecord checkRecord = new CheckRecord(reportRecord1, checkerInfo);
+            CheckRecord checkRecord = new CheckRecord(reportRecord1, checkerInfo
+                    ,reportRecordModel.getStatus());
             checkRecord.setOpinion(reportRecordModel.getOpinion());
             reportRecordRepository.save(reportRecord1);
             checkRecordRepository.save(checkRecord);

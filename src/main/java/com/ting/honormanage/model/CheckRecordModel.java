@@ -49,6 +49,8 @@ public class CheckRecordModel {
 
     private Timestamp checkTime;
 
+    private String status;
+
     public CheckRecordModel() {
     }
 
@@ -73,6 +75,7 @@ public class CheckRecordModel {
         this.checkerInfoPhone = checkRecord.getCheckerInfo().getPhone();
         this.opinion = checkRecord.getOpinion();
         this.checkTime = checkRecord.getCheckTime();
+        this.status = checkRecord.getStatus();
     }
 
     public Long getId() {
@@ -179,6 +182,8 @@ public class CheckRecordModel {
         this.studentInfoClass = studentInfoClass;
     }
 
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     public Timestamp getReportRecordRecordTime() {
         return reportRecordRecordTime;
     }
@@ -234,5 +239,13 @@ public class CheckRecordModel {
 
     public void setCheckTime(Timestamp checkTime) {
         this.checkTime = checkTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

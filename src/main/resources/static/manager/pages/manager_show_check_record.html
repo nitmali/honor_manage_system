@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -29,6 +29,7 @@
     <!-- Custom Fonts -->
     <link href="../../publicResources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <link href="../customize/css/manager_show_check_record.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -105,7 +106,7 @@
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="manager_show_record.html">申报记录管理</a>
+                        <a href="manager_show_check_record.html">审核记录管理</a>
                     </li>
                 </ul>
             </div>
@@ -130,18 +131,15 @@
                                id="manager_show_record_table">
                             <thead>
                             <tr>
-                                <th>学号</th>
-                                <th>姓名</th>
-                                <th>性别</th>
-                                <th>学院</th>
-                                <th>班级</th>
-                                <th>专业</th>
-                                <th>年级</th>
+                                <th>编号</th>
+                                <th>学生</th>
+                                <th>专业班级</th>
                                 <th>荣誉级别</th>
-                                <th>荣誉类别</th>
                                 <th>荣誉名称</th>
-                                <th>荣誉名次</th>
                                 <th>获奖日期</th>
+                                <th>审核员</th>
+                                <th>审核时间</th>
+                                <th>审核状态</th>
                             </tr>
                             </thead>
                         </table>
@@ -157,6 +155,108 @@
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
+
+<div class="modal fade " id="checkRecordModalApp">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- 模态框头部 -->
+            <div class="modal-header">
+                <h3 class="modal-title" style="text-align: center">
+                    {{checkRecord.studentInfoName}} &nbsp; {{checkRecord.honorInfoName}}
+                </h3>
+                <button type="button" class="close" data-dismiss="modal" v-on:click="close_model">&times;</button>
+            </div>
+
+            <!-- 模态框主体 -->
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1" id="checkRecordInfo">
+                        <table style="width: 100%" id="studentInfo">
+                            <tr>
+                                <th>学生信息</th>
+                            </tr>
+                            <tr class="tableGray">
+                                <td>学号</td>
+                                <td>{{checkRecord.studentInfoNumber}}</td>
+                                <td>姓名</td>
+                                <td>{{checkRecord.studentInfoName}}</td>
+                            </tr>
+                            <tr>
+                                <td>性别</td>
+                                <td>{{checkRecord.studentInfoSex}}</td>
+                                <td>学院</td>
+                                <td>{{checkRecord.studentInfoCollege}}</td>
+                            </tr>
+                            <tr class="tableGray">
+                                <td>班级</td>
+                                <td>{{checkRecord.studentInfoClass}}</td>
+                                <td>年级</td>
+                                <td>{{checkRecord.studentInfoGrade}}</td>
+                            </tr>
+                            <tr>
+                                <td>专业</td>
+                                <td>{{checkRecord.studentInfoMajor}}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                        <br/>
+                        <table style="width: 100%" id="honorInfo">
+                            <tr>
+                                <th>荣誉信息</th>
+                            </tr>
+                            <tr class="tableGray">
+                                <td>荣誉级别</td>
+                                <td>{{checkRecord.honorInfoLevel}}</td>
+                                <td>荣誉类别</td>
+                                <td>{{checkRecord.honorInfoKind}}</td>
+                            </tr>
+                            <tr>
+                                <td>荣誉名称</td>
+                                <td>{{checkRecord.honorInfoName}}</td>
+                                <td>荣誉名次</td>
+                                <td>{{checkRecord.honorInfoRank}}</td>
+                            </tr>
+                            <tr class="tableGray">
+                                <td>获奖日期</td>
+                                <td>{{checkRecord.honorInfoYear}}</td>
+                                <td>申报时间</td>
+                                <td>{{checkRecord.reportRecordRecordTime}}</td>
+                            </tr>
+                            <tr>
+                                <td>附件</td>
+                                <td colspan="3">
+                                    <a href="../../publicResources/nitLogo.png" target="_blank">
+                                        <img src="../../publicResources/nitLogo.png" style="height: 50%">
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <table style="width: 100%" id="checkerInfo">
+                            <tr>
+                                <th>审核员信息</th>
+                            </tr>
+                            <tr class="tableGray">
+                                <td>姓名</td>
+                                <td>{{checkRecord.checkerInfoName}}</td>
+                                <td>联系方式</td>
+                                <td>{{checkRecord.checkerInfoPhone}}</td>
+                            </tr>
+                            <tr>
+                                <td>审核时间</td>
+                                <td>{{checkRecord.checkTime}}</td>
+                                <td>审核意见</td>
+                                <td>{{checkRecord.opinion}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- jQuery -->
 <script src="../../publicResources/vendor/jquery/jquery.min.js"></script>
@@ -175,6 +275,9 @@
 <!-- Custom Theme JavaScript -->
 <script src="../../publicResources/dist/js/sb-admin-2.js"></script>
 
+<script src="../../publicResources/customize/js/vueJs/vue.js"></script>
+
+<script src="../customize/js/manager_show_check_record.js"></script>
 
 </body>
 

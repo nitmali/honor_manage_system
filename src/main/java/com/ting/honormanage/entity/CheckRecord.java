@@ -26,13 +26,45 @@ public class CheckRecord {
     @Column(nullable = false)
     private Timestamp checkTime;
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     public CheckRecord() {
     }
 
-    public CheckRecord(ReportRecord reportRecord, CheckerInfo checkerInfo){
+    public CheckRecord(ReportRecord reportRecord, CheckerInfo checkerInfo, String status) {
         this.reportRecord = reportRecord;
         this.checkerInfo = checkerInfo;
         this.checkTime = new Timestamp(System.currentTimeMillis());
+        if ("PASS".equals(status)) {
+            this.status = Status.PASS;
+        } else if ("NOT_PASS".equals(status)) {
+            this.status = Status.NOT_PASS;
+        } else {
+            this.status = null;
+        }
+    }
+
+    public enum Status {
+        //未通过
+        NOT_PASS,
+        //通过
+        PASS
+    }
+
+    public String getStatus() {
+        if (this.status == Status.NOT_PASS) {
+            return "不通过";
+        } else if (this.status == Status.PASS) {
+            return "通过";
+        } else {
+            return null;
+        }
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Long getId() {
