@@ -3,15 +3,12 @@ package com.ting.honormanage.controller;
 import com.ting.honormanage.entity.HonorInfo;
 import com.ting.honormanage.model.HonorInfoModel;
 import com.ting.honormanage.repository.HonorInfoRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author nitmali@126.com
@@ -33,7 +30,7 @@ public class HonorInfoController {
         return honorInfoModelArrayList;
     }
 
-    @GetMapping("/api/student/get_honorInfo_all")
+    @GetMapping("/api/student/get_honorInfo_all_test")
     public List<HonorInfoModel> getHonorInfoModelListOfStudent() {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = honorInfoRepository
@@ -43,6 +40,27 @@ public class HonorInfoController {
             honorInfoModelArrayList.add(honorInfoModel);
         }
         return honorInfoModelArrayList;
+    }
+
+    @PostMapping("/api/student/get_honorInfo_all")
+    public Map<String, Object> getHonorInfoModelListOfStudent(int draw, int start, int length) {
+        PageRequest pageRequest = new PageRequest((start / length), length);
+        Page<HonorInfo> page =  honorInfoRepository.findAll(pageRequest);
+        List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
+        for (int i = 0;i < page.getContent().size();i++) {
+            if(page.getContent().get(i).getStatus() != HonorInfo.Status.INVALID)
+            {
+                HonorInfoModel honorInfoModel = new HonorInfoModel(page.getContent().get(i));
+                honorInfoModelArrayList.add(honorInfoModel);
+            }
+        }
+        Map<String, Object> maps = new HashMap<>();
+        long totalCount = page.getTotalElements();
+        maps.put("draw", draw);
+        maps.put("recordsTotal", totalCount);
+        maps.put("recordsFiltered", totalCount);
+        maps.put("data", honorInfoModelArrayList);
+        return maps;
     }
 
     @PostMapping("/api/manager/add_honorInfo")

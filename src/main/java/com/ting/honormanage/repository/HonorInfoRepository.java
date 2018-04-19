@@ -1,6 +1,7 @@
 package com.ting.honormanage.repository;
 
 import com.ting.honormanage.entity.HonorInfo;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.w3c.dom.ls.LSInput;
 
@@ -11,7 +12,7 @@ import java.util.List;
  * @author nitmali@126.com
  * @date 2018/3/21 13:14
  */
-public interface HonorInfoRepository extends CrudRepository<HonorInfo,Long>{
+public interface HonorInfoRepository extends JpaRepository<HonorInfo,Long> {
     /**
      * 根据学年间断查询荣誉
      */
@@ -45,4 +46,5 @@ public interface HonorInfoRepository extends CrudRepository<HonorInfo,Long>{
 
     List<HonorInfo> findHonorInfoByStatusNotLike(HonorInfo.Status status);
 
+    List<HonorInfo> findAll();
 }
