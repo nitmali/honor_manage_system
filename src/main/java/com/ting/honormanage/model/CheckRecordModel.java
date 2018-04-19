@@ -183,7 +183,7 @@ public class CheckRecordModel {
     }
 
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Timestamp getReportRecordRecordTime() {
         return reportRecordRecordTime;
     }
@@ -232,7 +232,7 @@ public class CheckRecordModel {
         this.opinion = opinion;
     }
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Timestamp getCheckTime() {
         return checkTime;
     }

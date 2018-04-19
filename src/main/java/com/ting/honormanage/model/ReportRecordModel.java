@@ -36,8 +36,6 @@ public class ReportRecordModel {
 
     private Timestamp recordTime;
 
-    private String opinion;
-
     private String annex;
 
     private String status;
@@ -168,21 +166,13 @@ public class ReportRecordModel {
         this.studentInfoClass = studentInfoClass;
     }
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Timestamp getRecordTime() {
         return recordTime;
     }
 
     public void setRecordTime(Timestamp recordTime) {
         this.recordTime = recordTime;
-    }
-
-    public String getOpinion() {
-        return opinion;
-    }
-
-    public void setOpinion(String opinion) {
-        this.opinion = opinion;
     }
 
     public String getAnnex() {

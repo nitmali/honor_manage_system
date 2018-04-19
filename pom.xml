@@ -4,8 +4,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.nitmali</groupId>
-    <artifactId>honor_manage_system</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <artifactId>honorApp</artifactId>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
 
@@ -70,16 +70,6 @@
             <version>2.5.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework.boot</groupId>-->
-            <!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>net.sourceforge.nekohtml</groupId>-->
-            <!--<artifactId>nekohtml</artifactId>-->
-            <!--<version>1.9.22</version>-->
-        <!--</dependency>-->
     </dependencies>
     <build>
         <plugins>
