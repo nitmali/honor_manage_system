@@ -36,6 +36,8 @@ public class ReportRecordModel {
 
     private Timestamp recordTime;
 
+    private String opinion;
+
     private String annex;
 
     private String status;
@@ -173,6 +175,14 @@ public class ReportRecordModel {
 
     public void setRecordTime(Timestamp recordTime) {
         this.recordTime = recordTime;
+    }
+
+    public String getOpinion() {
+        return opinion;
+    }
+
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
     }
 
     public String getAnnex() {
