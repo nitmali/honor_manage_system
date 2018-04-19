@@ -1,6 +1,7 @@
 package com.ting.honormanage.controller;
 
 import com.ting.honormanage.entity.StudentInfo;
+import com.ting.honormanage.model.ChangePasswordModel;
 import com.ting.honormanage.repository.StudentInfoRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -81,4 +83,17 @@ public class StudentInfoController {
         return "{\"message\":\"request success\"}";
     }
 
+    @PostMapping("/api/student/change_studentPassword")
+    public String changeStudentPassword(@RequestBody ChangePasswordModel changePasswordModel, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        StudentInfo studentInfo = studentInfoRepository
+                .findStudentInfoByNumber((String) session.getAttribute("userName"));
+        if (changePasswordModel.getOldPassword().equals(studentInfo.getPassword())) {
+            studentInfo.setPassword(changePasswordModel.getNewPassword());
+            studentInfoRepository.save(studentInfo);
+            return "{\"message\":\"change password success\"}";
+        } else {
+            return "{\"message\":\"old password error\"}";
+        }
+    }
 }

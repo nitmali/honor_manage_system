@@ -134,9 +134,9 @@ public class CheckerInfo {
     public String authorityOfCheckerInfoModel() {
         String authorityFIRST_LEVEL = "一级权限";
         String authoritySECOND_LEVEL = "二级权限";
-        if (this.authority == CheckerInfo.Authority.FIRST_LEVEL) {
+        if (this.authority == Authority.FIRST_LEVEL) {
             return authorityFIRST_LEVEL;
-        } else if (this.authority == CheckerInfo.Authority.SECOND_LEVEL) {
+        } else if (this.authority == Authority.SECOND_LEVEL) {
             return authoritySECOND_LEVEL;
         } else {
             return null;

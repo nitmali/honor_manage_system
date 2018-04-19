@@ -180,13 +180,13 @@ public class HonorInfo {
 
         if (this.level == Level.COLLEGE) {
             return levelCOLLEGE;
-        } else if (this.level == HonorInfo.Level.SCHOOL) {
+        } else if (this.level == Level.SCHOOL) {
             return levelSCHOOL;
-        } else if (this.level == HonorInfo.Level.MUNICIPAL) {
+        } else if (this.level == Level.MUNICIPAL) {
             return levelMUNICIPAL;
-        } else if (this.level == HonorInfo.Level.PROVINCIAL) {
+        } else if (this.level == Level.PROVINCIAL) {
             return levelPROVINCIAL;
-        } else if (this.level == HonorInfo.Level.NATIONAL) {
+        } else if (this.level == Level.NATIONAL) {
             return levelNATIONAL;
         } else {
             return null;
@@ -198,13 +198,13 @@ public class HonorInfo {
         String kindDISCIPLINE_COMPETITION = "学科竞赛";
         String kindINNOVATION_ENTREPRENEURSHIP = "创新创业";
         String kindEXAMINATIONS = "考级考证";
-        if (this.kind == HonorInfo.Kind.ACADEMIC_RESEARCH) {
+        if (this.kind == Kind.ACADEMIC_RESEARCH) {
             return kindACADEMIC_RESEARCH;
-        } else if (this.kind == HonorInfo.Kind.DISCIPLINE_COMPETITION) {
+        } else if (this.kind == Kind.DISCIPLINE_COMPETITION) {
             return kindDISCIPLINE_COMPETITION;
-        } else if (this.kind == HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP) {
+        } else if (this.kind == Kind.INNOVATION_ENTREPRENEURSHIP) {
             return kindINNOVATION_ENTREPRENEURSHIP;
-        } else if (this.kind == HonorInfo.Kind.EXAMINATIONS) {
+        } else if (this.kind == Kind.EXAMINATIONS) {
             return kindEXAMINATIONS;
         } else {
             return null;
@@ -217,13 +217,13 @@ public class HonorInfo {
         String rankSECOND = "二等奖";
         String rankTHIRD = "三等奖";
 
-        if (this.rank == HonorInfo.Rank.OTHER) {
+        if (this.rank == Rank.OTHER) {
             return rankOTHER;
-        } else if (this.rank == HonorInfo.Rank.FIRST) {
+        } else if (this.rank == Rank.FIRST) {
             return rankFIRST;
-        } else if (this.rank == HonorInfo.Rank.SECOND) {
+        } else if (this.rank == Rank.SECOND) {
             return rankSECOND;
-        } else if (this.rank == HonorInfo.Rank.THIRD) {
+        } else if (this.rank == Rank.THIRD) {
             return rankTHIRD;
         } else {
             return null;
@@ -233,9 +233,9 @@ public class HonorInfo {
     public String statusOfHonorInfoModel() {
         String statusEFFECTIVE = "有效";
         String statusINVALID = "失效";
-        if (this.status == HonorInfo.Status.EFFECTIVE) {
+        if (this.status == Status.EFFECTIVE) {
             return statusEFFECTIVE;
-        } else if (this.status == HonorInfo.Status.INVALID) {
+        } else if (this.status == Status.INVALID) {
             return statusINVALID;
         } else {
             return null;

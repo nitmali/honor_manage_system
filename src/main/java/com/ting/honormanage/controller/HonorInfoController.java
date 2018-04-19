@@ -30,7 +30,19 @@ public class HonorInfoController {
             HonorInfoModel honorInfoModel = new HonorInfoModel(aHonorInfoList);
             honorInfoModelArrayList.add(honorInfoModel);
         }
-            return honorInfoModelArrayList;
+        return honorInfoModelArrayList;
+    }
+
+    @GetMapping("/api/student/get_honorInfo_all")
+    public List<HonorInfoModel> getHonorInfoModelListOfStudent() {
+        List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
+        List<HonorInfo> honorInfoList = honorInfoRepository
+                .findHonorInfoByStatusNotLike(HonorInfo.Status.INVALID);
+        for (HonorInfo aHonorInfoList : honorInfoList) {
+            HonorInfoModel honorInfoModel = new HonorInfoModel(aHonorInfoList);
+            honorInfoModelArrayList.add(honorInfoModel);
+        }
+        return honorInfoModelArrayList;
     }
 
     @PostMapping("/api/manager/add_honorInfo")
@@ -40,7 +52,7 @@ public class HonorInfoController {
         return "{\"message\":\"add honorInfo success\"}";
     }
 
-    @GetMapping("/api/manager/get_honorInfo_yearBetween")
+    @GetMapping("/api/manager_student/get_honorInfo_yearBetween")
     public List<HonorInfoModel> getHonorInfoFromYearBetween(Date year1, Date year2) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = honorInfoRepository.findHonorInfoByYearBetween(year1, year2);
@@ -51,12 +63,12 @@ public class HonorInfoController {
         return honorInfoModelArrayList;
     }
 
-    @GetMapping("/api/manager/get_honorInfo_id")
+    @GetMapping("/api/manager_student/get_honorInfo_id")
     public HonorInfoModel getHonorInfoFromId(Long id) {
         return new HonorInfoModel(honorInfoRepository.findHonorInfoById(id));
     }
 
-    @GetMapping("/api/manager/get_honorInfo_name")
+    @GetMapping("/api/manager_student/get_honorInfo_name")
     public List<HonorInfoModel> getHonorInfoFromName(String name) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = honorInfoRepository.findHonorInfoByName(name);
@@ -67,7 +79,7 @@ public class HonorInfoController {
         return honorInfoModelArrayList;
     }
 
-    @GetMapping("/api/manager/get_honorInfo_kind")
+    @GetMapping("/api/manager_student/get_honorInfo_kind")
     public List<HonorInfoModel> getHonorInfoFromKind(HonorInfo.Kind kind) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = honorInfoRepository.findHonorInfoByKind(kind);
@@ -78,7 +90,7 @@ public class HonorInfoController {
         return honorInfoModelArrayList;
     }
 
-    @GetMapping("/api/manager/get_honorInfo_status")
+    @GetMapping("/api/manager_student/get_honorInfo_status")
     public List<HonorInfoModel> getHonorInfoFromStatus(HonorInfo.Status status) {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = honorInfoRepository.findHonorInfoByStatus(status);

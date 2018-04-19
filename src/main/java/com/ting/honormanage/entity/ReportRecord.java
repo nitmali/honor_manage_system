@@ -108,17 +108,17 @@ public class ReportRecord {
         String statusALREADY_REVIEW = "通过";
         String statusNOT_PASS = "不通过";
         String statusINVALID = "失效";
-        if (this.status == ReportRecord.Status.WAITING_SUBMISSION) {
+        if (this.status == Status.WAITING_SUBMISSION) {
             return statusWAITING_SUBMISSION;
-        } else if (this.status == ReportRecord.Status.WAITING_REVIEW) {
+        } else if (this.status == Status.WAITING_REVIEW) {
             return statusWAITING_REVIEW;
-        } else if (this.status == ReportRecord.Status.FIRST_REVIEW) {
+        } else if (this.status == Status.FIRST_REVIEW) {
             return statusFIRST_REVIEW;
-        } else if (this.status == ReportRecord.Status.ALREADY_REVIEW) {
+        } else if (this.status == Status.ALREADY_REVIEW) {
             return statusALREADY_REVIEW;
-        } else if (this.status == ReportRecord.Status.NOT_PASS) {
+        } else if (this.status == Status.NOT_PASS) {
             return statusNOT_PASS;
-        } else if (this.status == ReportRecord.Status.INVALID) {
+        } else if (this.status == Status.INVALID) {
             return statusINVALID;
         } else {
             return null;
@@ -133,17 +133,17 @@ public class ReportRecord {
         String statusNOT_PASS = "不通过";
         String statusINVALID = "失效";
         if (statusWAITING_SUBMISSION.equals(status)) {
-            this.status = ReportRecord.Status.WAITING_SUBMISSION;
+            this.status = Status.WAITING_SUBMISSION;
         } else if (statusWAITING_REVIEW.equals(status)) {
-            this.status = ReportRecord.Status.WAITING_REVIEW;
+            this.status = Status.WAITING_REVIEW;
         } else if (statusFIRST_REVIEW.equals(status)) {
-            this.status = ReportRecord.Status.FIRST_REVIEW;
+            this.status = Status.FIRST_REVIEW;
         } else if (statusALREADY_REVIEW.equals(status)) {
-            this.status = ReportRecord.Status.ALREADY_REVIEW;
+            this.status = Status.ALREADY_REVIEW;
         } else if (statusNOT_PASS.equals(status)) {
-            this.status = ReportRecord.Status.NOT_PASS;
+            this.status = Status.NOT_PASS;
         } else if (statusINVALID.equals(status)) {
-            this.status = ReportRecord.Status.INVALID;
+            this.status = Status.INVALID;
         } else {
             this.status = null;
         }

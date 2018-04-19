@@ -15,7 +15,7 @@ public interface HonorInfoRepository extends CrudRepository<HonorInfo,Long>{
     /**
      * 根据学年间断查询荣誉
      */
-    List<HonorInfo> findHonorInfoByYearBetween(Date year1,Date year2);
+    List<HonorInfo> findHonorInfoByYearBetween(Date year1, Date year2);
 
     /**
      * 根据学年查询荣誉
@@ -42,5 +42,7 @@ public interface HonorInfoRepository extends CrudRepository<HonorInfo,Long>{
      * 根据状态查询荣誉
      */
     List<HonorInfo> findHonorInfoByStatus(HonorInfo.Status status);
+
+    List<HonorInfo> findHonorInfoByStatusNotLike(HonorInfo.Status status);
 
 }

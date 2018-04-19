@@ -4,6 +4,7 @@ import com.ting.honormanage.entity.*;
 import com.ting.honormanage.model.HonorInfoModel;
 import com.ting.honormanage.model.ReportRecordModel;
 import com.ting.honormanage.repository.*;
+import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -97,6 +98,20 @@ public class ReportRecordController {
         return reportRecordModelArrayList;
     }
 
+    @GetMapping("/api/student/get_reportRecord_studentInfo")
+    public List<ReportRecordModel> getReportRecordListFromStudentInfo(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        StudentInfo studentInfo = studentInfoRepository
+                .findStudentInfoByNumber((String) session.getAttribute("userName"));
+        List<ReportRecordModel> reportRecordModelArrayList = new ArrayList<>();
+        List<ReportRecord> reportRecordList = reportRecordRepository.findReportRecordByStudentInfo(studentInfo);
+        for (ReportRecord aReportRecordList : reportRecordList) {
+            ReportRecordModel reportRecordModel = new ReportRecordModel(aReportRecordList);
+            reportRecordModelArrayList.add(reportRecordModel);
+        }
+        return reportRecordModelArrayList;
+    }
+
 
     @GetMapping("/api/manager_checker/get_reportRecord_honorInfo")
     public List<ReportRecordModel> getReportRecordListFromHonorInfo(Long honorId) {
@@ -161,78 +176,78 @@ public class ReportRecordController {
     }
 
     @GetMapping("/api/manager/count_reportRecord_Kind_level")
-    public List<Map<String,Long>> countReportRecordFromKindAndLevel(){
+    public List<Map<String, Long>> countReportRecordFromKindAndLevel() {
 
-        List<Map<String,Long>> mapList = new ArrayList<>();
-        Map<String,Long> map1 = new HashMap<>();
-        map1.put("ACADEMIC_RESEARCH",reportRecordRepository
+        List<Map<String, Long>> mapList = new ArrayList<>();
+        Map<String, Long> map1 = new HashMap<>();
+        map1.put("ACADEMIC_RESEARCH", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.NATIONAL,HonorInfo.Kind.ACADEMIC_RESEARCH));
-        map1.put("DISCIPLINE_COMPETITION",reportRecordRepository
+                        HonorInfo.Level.NATIONAL, HonorInfo.Kind.ACADEMIC_RESEARCH));
+        map1.put("DISCIPLINE_COMPETITION", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.NATIONAL,HonorInfo.Kind.DISCIPLINE_COMPETITION));
-        map1.put("INNOVATION_ENTREPRENEURSHIP",reportRecordRepository
+                        HonorInfo.Level.NATIONAL, HonorInfo.Kind.DISCIPLINE_COMPETITION));
+        map1.put("INNOVATION_ENTREPRENEURSHIP", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.NATIONAL,HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP));
-        map1.put("EXAMINATIONS",reportRecordRepository
+                        HonorInfo.Level.NATIONAL, HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP));
+        map1.put("EXAMINATIONS", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.NATIONAL,HonorInfo.Kind.EXAMINATIONS));
+                        HonorInfo.Level.NATIONAL, HonorInfo.Kind.EXAMINATIONS));
 
-        Map<String,Long> map2 = new HashMap<>();
-        map2.put("ACADEMIC_RESEARCH",reportRecordRepository
+        Map<String, Long> map2 = new HashMap<>();
+        map2.put("ACADEMIC_RESEARCH", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.PROVINCIAL,HonorInfo.Kind.ACADEMIC_RESEARCH));
-        map2.put("DISCIPLINE_COMPETITION",reportRecordRepository
+                        HonorInfo.Level.PROVINCIAL, HonorInfo.Kind.ACADEMIC_RESEARCH));
+        map2.put("DISCIPLINE_COMPETITION", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.PROVINCIAL,HonorInfo.Kind.DISCIPLINE_COMPETITION));
-        map2.put("INNOVATION_ENTREPRENEURSHIP",reportRecordRepository
+                        HonorInfo.Level.PROVINCIAL, HonorInfo.Kind.DISCIPLINE_COMPETITION));
+        map2.put("INNOVATION_ENTREPRENEURSHIP", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.PROVINCIAL,HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP));
-        map2.put("EXAMINATIONS",reportRecordRepository
+                        HonorInfo.Level.PROVINCIAL, HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP));
+        map2.put("EXAMINATIONS", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.PROVINCIAL,HonorInfo.Kind.EXAMINATIONS));
+                        HonorInfo.Level.PROVINCIAL, HonorInfo.Kind.EXAMINATIONS));
 
-        Map<String,Long> map3 = new HashMap<>();
-        map3.put("ACADEMIC_RESEARCH",reportRecordRepository
+        Map<String, Long> map3 = new HashMap<>();
+        map3.put("ACADEMIC_RESEARCH", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.MUNICIPAL,HonorInfo.Kind.ACADEMIC_RESEARCH));
-        map3.put("DISCIPLINE_COMPETITION",reportRecordRepository
+                        HonorInfo.Level.MUNICIPAL, HonorInfo.Kind.ACADEMIC_RESEARCH));
+        map3.put("DISCIPLINE_COMPETITION", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.MUNICIPAL,HonorInfo.Kind.DISCIPLINE_COMPETITION));
-        map3.put("INNOVATION_ENTREPRENEURSHIP",reportRecordRepository
+                        HonorInfo.Level.MUNICIPAL, HonorInfo.Kind.DISCIPLINE_COMPETITION));
+        map3.put("INNOVATION_ENTREPRENEURSHIP", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.MUNICIPAL,HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP));
-        map3.put("EXAMINATIONS",reportRecordRepository
+                        HonorInfo.Level.MUNICIPAL, HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP));
+        map3.put("EXAMINATIONS", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.MUNICIPAL,HonorInfo.Kind.EXAMINATIONS));
+                        HonorInfo.Level.MUNICIPAL, HonorInfo.Kind.EXAMINATIONS));
 
-        Map<String,Long> map4 = new HashMap<>();
-        map4.put("ACADEMIC_RESEARCH",reportRecordRepository
+        Map<String, Long> map4 = new HashMap<>();
+        map4.put("ACADEMIC_RESEARCH", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.SCHOOL,HonorInfo.Kind.ACADEMIC_RESEARCH));
-        map4.put("DISCIPLINE_COMPETITION",reportRecordRepository
+                        HonorInfo.Level.SCHOOL, HonorInfo.Kind.ACADEMIC_RESEARCH));
+        map4.put("DISCIPLINE_COMPETITION", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.SCHOOL,HonorInfo.Kind.DISCIPLINE_COMPETITION));
-        map4.put("INNOVATION_ENTREPRENEURSHIP",reportRecordRepository
+                        HonorInfo.Level.SCHOOL, HonorInfo.Kind.DISCIPLINE_COMPETITION));
+        map4.put("INNOVATION_ENTREPRENEURSHIP", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.SCHOOL,HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP));
-        map4.put("EXAMINATIONS",reportRecordRepository
+                        HonorInfo.Level.SCHOOL, HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP));
+        map4.put("EXAMINATIONS", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.SCHOOL,HonorInfo.Kind.EXAMINATIONS));
+                        HonorInfo.Level.SCHOOL, HonorInfo.Kind.EXAMINATIONS));
 
-        Map<String,Long> map5 = new HashMap<>();
-        map5.put("ACADEMIC_RESEARCH",reportRecordRepository
+        Map<String, Long> map5 = new HashMap<>();
+        map5.put("ACADEMIC_RESEARCH", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.COLLEGE,HonorInfo.Kind.ACADEMIC_RESEARCH));
-        map5.put("DISCIPLINE_COMPETITION",reportRecordRepository
+                        HonorInfo.Level.COLLEGE, HonorInfo.Kind.ACADEMIC_RESEARCH));
+        map5.put("DISCIPLINE_COMPETITION", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.COLLEGE,HonorInfo.Kind.DISCIPLINE_COMPETITION));
-        map5.put("INNOVATION_ENTREPRENEURSHIP",reportRecordRepository
+                        HonorInfo.Level.COLLEGE, HonorInfo.Kind.DISCIPLINE_COMPETITION));
+        map5.put("INNOVATION_ENTREPRENEURSHIP", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.COLLEGE,HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP));
-        map5.put("EXAMINATIONS",reportRecordRepository
+                        HonorInfo.Level.COLLEGE, HonorInfo.Kind.INNOVATION_ENTREPRENEURSHIP));
+        map5.put("EXAMINATIONS", reportRecordRepository
                 .countReportRecordByStatusAndHonorInfo_LevelAndHonorInfo_Kind(ReportRecord.Status.ALREADY_REVIEW,
-                        HonorInfo.Level.COLLEGE,HonorInfo.Kind.EXAMINATIONS));
+                        HonorInfo.Level.COLLEGE, HonorInfo.Kind.EXAMINATIONS));
 
         mapList.add(map1);
         mapList.add(map2);

@@ -1,0 +1,16 @@
+#reportRecordInfo table{
+    font-size:15px;
+    border-collapse: collapse;
+}
+
+#reportRecordInfo table td{
+    width: 25%;
+}
+
+#reportRecordInfo table tr td{
+    padding: 8px;
+}
+
+.tableGray{
+    background: #f9f9f9;
+}
