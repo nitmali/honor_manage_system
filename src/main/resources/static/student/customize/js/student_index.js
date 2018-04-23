@@ -82,8 +82,8 @@ var honorModalApp = new Vue({
             aLengthMenu: [5, 10, 25, 50], //更改显示记录数选项
             ajax: {
                 url: "/api/student/get_honorInfo_all",
-                type: 'POST',
-                dataType: 'JSON'
+                type: 'GET',
+                dataSrc: ''
             },
             columns: [
                 {data: "id"},
