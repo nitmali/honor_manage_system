@@ -78,7 +78,7 @@ var honorModalApp = new Vue({
             responsive: true,
             bAutoWidth: true,
             processing: true,
-            serverSide: true,
+            serverSide: false,
             aLengthMenu: [5, 10, 25, 50], //更改显示记录数选项
             ajax: {
                 url: "/api/student/get_honorInfo_all",

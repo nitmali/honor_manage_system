@@ -8,6 +8,8 @@ import com.ting.honormanage.model.ReportRecordModel;
 import com.ting.honormanage.repository.CheckRecordRepository;
 import com.ting.honormanage.repository.CheckerInfoRepository;
 import com.ting.honormanage.repository.ReportRecordRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,9 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author nitmali
@@ -34,7 +34,7 @@ public class CheckRecordController {
     @Resource
     private CheckerInfoRepository checkerInfoRepository;
 
-    @GetMapping("/api/manager_checker/get_checkRecord_all")
+    @GetMapping("/api/manager_checker/get_checkRecord_all_bf")
     public List<CheckRecordModel> getCheckRecordModelList() {
         List<CheckRecordModel> checkRecordModelArrayList = new ArrayList<>();
         List<CheckRecord> checkRecordList = (List<CheckRecord>) checkRecordRepository.findAll();
@@ -43,6 +43,24 @@ public class CheckRecordController {
             checkRecordModelArrayList.add(checkRecordModel);
         }
         return checkRecordModelArrayList;
+    }
+
+    @PostMapping("/api/manager_checker/get_checkRecord_all")
+    public Map<String, Object> getCheckRecordModelList(int draw, int start, int length) {
+        PageRequest pageRequest = new PageRequest((start / length), length);
+        Page<CheckRecord> page = checkRecordRepository.findAll(pageRequest);
+        List<CheckRecordModel> checkRecordModelArrayList = new ArrayList<>();
+        for (int i = 0; i < page.getContent().size(); i++) {
+            CheckRecordModel checkRecordModel  = new CheckRecordModel(page.getContent().get(i));
+            checkRecordModelArrayList.add(checkRecordModel);
+        }
+        Map<String, Object> maps = new HashMap<>();
+        long totalCount = page.getTotalElements();
+        maps.put("draw", draw);
+        maps.put("recordsTotal", totalCount);
+        maps.put("recordsFiltered", totalCount);
+        maps.put("data", checkRecordModelArrayList);
+        return maps;
     }
 
     @GetMapping("/api/manager_checker/get_checkRecord_id")
@@ -113,7 +131,7 @@ public class CheckRecordController {
                 reportRecord1.setStatus(ReportRecord.Status.NOT_PASS);
             }
             CheckRecord checkRecord = new CheckRecord(reportRecord1, checkerInfo
-                    ,reportRecordModel.getStatus());
+                    , reportRecordModel.getStatus());
             checkRecord.setOpinion(reportRecordModel.getOpinion());
             reportRecordRepository.save(reportRecord1);
             checkRecordRepository.save(checkRecord);

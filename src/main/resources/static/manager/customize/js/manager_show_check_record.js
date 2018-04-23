@@ -56,11 +56,12 @@ function getDataTable() {
             responsive: true,
             bAutoWidth: true,
             processing: true,
+            serverSide:true,
             aLengthMenu: [5, 10, 25, 50], //更改显示记录数选项
             ajax: {
                 url: "/api/manager_checker/get_checkRecord_all",
-                type: 'GET',
-                dataSrc: ""
+                type: 'POST',
+                dataType: "JSON"
             },
             columns: [
                 {data: "id"},

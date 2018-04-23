@@ -30,7 +30,7 @@ public class HonorInfoController {
         return honorInfoModelArrayList;
     }
 
-    @GetMapping("/api/student/get_honorInfo_all_test")
+    @GetMapping("/api/student/get_honorInfo_all")
     public List<HonorInfoModel> getHonorInfoModelListOfStudent() {
         List<HonorInfoModel> honorInfoModelArrayList = new ArrayList<>();
         List<HonorInfo> honorInfoList = honorInfoRepository
@@ -42,7 +42,7 @@ public class HonorInfoController {
         return honorInfoModelArrayList;
     }
 
-    @PostMapping("/api/student/get_honorInfo_all")
+    @PostMapping("/api/student/get_honorInfo_all_test")
     public Map<String, Object> getHonorInfoModelListOfStudent(int draw, int start, int length) {
         PageRequest pageRequest = new PageRequest((start / length), length);
         Page<HonorInfo> page =  honorInfoRepository.findAll(pageRequest);
