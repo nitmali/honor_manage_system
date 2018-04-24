@@ -17,6 +17,8 @@ var checkRecordModalApp = new Vue({
                 },
                 function (checkRecord) {
                     checkRecordModalApp.checkRecord = checkRecord;
+                    $.cookie("reportRecordId",
+                        checkRecordModalApp.checkRecord.reportRecordRecordId,{expires: 7,path: '/'});
                 });
         },
         close_model: function () {

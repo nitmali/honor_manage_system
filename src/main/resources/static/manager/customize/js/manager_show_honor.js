@@ -11,7 +11,7 @@ var honorModalApp = new Vue({
     },
     methods: {
         get_honorInfo_id: function (id) {
-            $.get("/api/manager/get_honorInfo_id",
+            $.get("/api/manager_student/get_honorInfo_id",
                 {
                     id: id
                 },

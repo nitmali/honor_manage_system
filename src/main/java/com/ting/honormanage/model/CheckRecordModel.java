@@ -35,6 +35,8 @@ public class CheckRecordModel {
 
     private String studentInfoClass;
 
+    private Long reportRecordRecordId;
+
     private Timestamp reportRecordRecordTime;
 
     private String reportRecordAnnex;
@@ -68,6 +70,7 @@ public class CheckRecordModel {
         this.studentInfoGrade = checkRecord.getReportRecord().getStudentInfo().getGradeInfo().getName();
         this.studentInfoMajor = checkRecord.getReportRecord().getStudentInfo().getMajorInfo().getName();
         this.studentInfoClass = checkRecord.getReportRecord().getStudentInfo().getClassInfo().getName();
+        this.reportRecordRecordId = checkRecord.getReportRecord().getId();
         this.reportRecordRecordTime = checkRecord.getReportRecord().getRecordTime();
         this.reportRecordAnnex = checkRecord.getReportRecord().getAnnex();
         this.reportRecordStatus = checkRecord.getReportRecord().statusOfReportRecordModel();
@@ -182,6 +185,13 @@ public class CheckRecordModel {
         this.studentInfoClass = studentInfoClass;
     }
 
+    public Long getReportRecordRecordId() {
+        return reportRecordRecordId;
+    }
+
+    public void setReportRecordRecordId(Long reportRecordRecordId) {
+        this.reportRecordRecordId = reportRecordRecordId;
+    }
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     public Timestamp getReportRecordRecordTime() {

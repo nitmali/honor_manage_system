@@ -161,9 +161,6 @@
         <div class="modal-content">
             <!-- 模态框头部 -->
             <div class="modal-header">
-                <h3 class="modal-title" style="text-align: center">
-                    {{checkRecord.studentInfoName}} &nbsp; {{checkRecord.honorInfoName}}
-                </h3>
                 <button type="button" class="close" data-dismiss="modal" v-on:click="close_model">&times;</button>
             </div>
 
@@ -227,9 +224,9 @@
                             <tr>
                                 <td>附件</td>
                                 <td colspan="3">
-                                    <a href="../../publicResources/nitLogo.png" target="_blank">
-                                        <img src="../../publicResources/nitLogo.png" style="height: 50%">
-                                    </a>
+                                    <a href="../../publicResources/pages/show_annex.html" target="_Blank"><img
+                                            :src="'/api/checker_manager/get_annex?id='+checkRecord.reportRecordRecordId"
+                                            height="90" width="160"></a>
                                 </td>
                             </tr>
                         </table>
@@ -274,6 +271,8 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="../../publicResources/dist/js/sb-admin-2.js"></script>
+
+<script src="../../publicResources/customize/js/cookie/cookie.js"></script>
 
 <script src="../../publicResources/customize/js/vueJs/vue.js"></script>
 

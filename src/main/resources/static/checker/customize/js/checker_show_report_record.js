@@ -17,6 +17,8 @@ var reportRecordModalApp = new Vue({
                 },
                 function (reportRecord) {
                     reportRecordModalApp.reportRecord = reportRecord;
+                    $.cookie("reportRecordId",
+                        reportRecordModalApp.reportRecord.id,{expires: 7,path: '/'});
                 });
         }
         ,
