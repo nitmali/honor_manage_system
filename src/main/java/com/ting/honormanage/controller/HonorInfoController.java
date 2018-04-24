@@ -12,7 +12,7 @@ import java.util.*;
 
 /**
  * @author nitmali@126.com
- * @date 2018/api/manager/3/api/manager/31 14:29
+ * @date 2018/3/31 14:29
  */
 @RestController
 public class HonorInfoController {

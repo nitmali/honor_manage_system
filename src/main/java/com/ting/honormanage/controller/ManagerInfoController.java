@@ -2,9 +2,7 @@ package com.ting.honormanage.controller;
 
 import com.ting.honormanage.entity.ManagerInfo;
 import com.ting.honormanage.model.ChangePasswordModel;
-import com.ting.honormanage.model.UserModel;
 import com.ting.honormanage.repository.ManagerInfoRepository;
-import org.hibernate.Session;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

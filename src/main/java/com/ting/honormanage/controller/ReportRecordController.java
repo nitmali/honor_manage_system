@@ -1,11 +1,11 @@
 package com.ting.honormanage.controller;
 
 import com.ting.honormanage.entity.*;
-import com.ting.honormanage.model.HonorInfoModel;
 import com.ting.honormanage.model.ReportRecordModel;
 import com.ting.honormanage.repository.*;
 import com.ting.honormanage.service.storage.StorageService;
-import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -266,6 +266,19 @@ public class ReportRecordController {
         mapList.add(map4);
         mapList.add(map5);
         return mapList;
+    }
+
+    @GetMapping("/api/checker_manager/get_annex")
+    public ResponseEntity<org.springframework.core.io.Resource> getAnnex(Long id) {
+
+        try {
+            String annexName = reportRecordRepository.findOne(id).getAnnex();
+            org.springframework.core.io.Resource annex = storageService.loadAsResource(annexName);
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                    "attachment; filename=\"" + annexName + "\"").body(annex);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 }

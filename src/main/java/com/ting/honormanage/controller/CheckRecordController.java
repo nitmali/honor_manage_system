@@ -141,18 +141,4 @@ public class CheckRecordController {
             return "{\"message\":\"check reportRecord success\"}";
         }
     }
-
-    @GetMapping("/api/checker_manager/get_annex")
-    public ResponseEntity<org.springframework.core.io.Resource> getCarImage(Long id) {
-
-        try {
-            String annexName = reportRecordRepository.findOne(id).getAnnex();
-            org.springframework.core.io.Resource annex = storageService.loadAsResource(annexName);
-            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
-                    "attachment; filename=\"" + annexName + "\"").body(annex);
-        } catch (Exception e) {
-            return null;
-        }
-
-    }
 }
