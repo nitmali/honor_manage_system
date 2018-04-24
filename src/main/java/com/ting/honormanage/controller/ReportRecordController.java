@@ -4,8 +4,10 @@ import com.ting.honormanage.entity.*;
 import com.ting.honormanage.model.HonorInfoModel;
 import com.ting.honormanage.model.ReportRecordModel;
 import com.ting.honormanage.repository.*;
+import com.ting.honormanage.service.storage.StorageService;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -34,6 +36,9 @@ public class ReportRecordController {
 
     @Resource
     private CheckRecordRepository checkRecordRepository;
+
+    @Resource
+    private StorageService storageService;
 
     @GetMapping("/api/checker_manager/get_reportRecord_all")
     public List<ReportRecordModel> getReportRecordList() {
@@ -140,12 +145,18 @@ public class ReportRecordController {
     }
 
     @PostMapping("/api/student/add_reportRecord")
-    public String addReportRecord(@RequestBody HonorInfoModel honorInfoModel, HttpServletRequest request) {
+    public String addReportRecord(Long honorInfoId
+            , MultipartFile annex, HttpServletRequest request) {
         HttpSession session = request.getSession();
         StudentInfo studentInfo = studentInfoRepository
                 .findStudentInfoByNumber((String) session.getAttribute("userName"));
-        HonorInfo honorInfo = new HonorInfo(honorInfoModel);
+        HonorInfo honorInfo = honorInfoRepository.findHonorInfoById(honorInfoId);
         ReportRecord reportRecord = new ReportRecord(honorInfo, studentInfo);
+        if (annex.isEmpty()) {
+            return "{\"msg\":\"image error\"}";
+        }
+        String picName = storageService.store(annex);
+        reportRecord.setAnnex(picName);
         reportRecordRepository.save(reportRecord);
         return "{\"message\":\"add reportRecord success\"}";
     }

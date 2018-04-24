@@ -20,11 +20,15 @@ var honorModalApp = new Vue({
                 });
         },
         add_reportRecord: function () {
+            var formData = new FormData($("form")[0]);
+            formData.append("honorInfoId",honorModalApp.honorInfo.id);
             $.ajax({
                 url: '/api/student/add_reportRecord',
                 type: 'POST',
-                data: JSON.stringify(honorModalApp.honorInfo, null, 4),
-                contentType: "application/json",
+                cache: false,
+                data: formData,
+                processData: false,
+                contentType: false,
                 dataType: "json",
                 success: function (data) {
                     if (data.message === "add reportRecord success") {
