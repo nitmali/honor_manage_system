@@ -155,9 +155,13 @@ public class ReportRecordController {
         if (annex.isEmpty()) {
             return "{\"msg\":\"image error\"}";
         }
-        String picName = storageService.store(annex);
-        reportRecord.setAnnex(picName);
-        reportRecordRepository.save(reportRecord);
+        try {
+            String picName = storageService.store(annex);
+            reportRecord.setAnnex(picName);
+            reportRecordRepository.save(reportRecord);
+        }catch (Exception e){
+            return "{\"message\":\"path error\"}";
+        }
         return "{\"message\":\"add reportRecord success\"}";
     }
 
