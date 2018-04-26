@@ -5,6 +5,7 @@
  */
 $(function() {
     $('#side-menu').metisMenu();
+    addFooter();
 });
 
 //Loads the correct sidebar on window load,
@@ -46,8 +47,18 @@ $(function() {
     }
 });
 
-function logout() {
-
+function addFooter() {
+    var footer = "<footer>\n" +
+        "    <div class=\"container\">\n" +
+        "        <div class=\"row\">\n" +
+        "            <div class=\"col-sm-12 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4\" " +
+        "                  style='text-align: center'>\n" +
+        "                <span>2018 © 高校荣誉管理平台 by ting</a></span> |\n" +
+        "                <span><a href=\"mailto:nitmali@126.com\">联系管理员</a></span>\n" +
+        "            </div>\n" +
+        "        </div>\n" +
+        "    </div>\n" +
+        "</footer>";
+    $('body').append(footer);
 }
-
 
